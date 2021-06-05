@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>DEBUG_TARGET</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\..\Src\Devices\CMSIS\Include;..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Include;..\..\..\Src\Devices\Infineon\XMC\XMClib\inc;..\..\..\Src\Devices\Infineon\XMC;..\..\..\Src\Boards\XMC1400_Boot_Kit;..\..\..\Src</IncludePath>
             </VariousControls>
@@ -611,7 +611,7 @@
           <OutputName>XMC1400_Boot_Kit</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Release\Listings\</ListingPath>
@@ -640,9 +640,9 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
+            <RunUserProg2>1</RunUserProg2>
             <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg2Name>$KARM\ARMCC\bin\fromelf.exe --bin --m32 --output=$L@L.srec !L</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
@@ -748,7 +748,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>1</useUlib>
+            <useUlib>0</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -872,7 +872,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>2</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -885,7 +885,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>1</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
+            <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -896,9 +896,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>RELEASE_TARGET</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\Src\Devices\CMSIS\Include;..\..\..\Src\Devices\XMC1400_series\Include;..\..\..\Src\Devices\XMClib\inc;..\..\..\Src</IncludePath>
+              <IncludePath>..\..\..\Src\Devices\CMSIS\Include;..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Include;..\..\..\Src\Devices\Infineon\XMC\XMClib\inc;..\..\..\Src\Devices\Infineon\XMC;..\..\..\Src\Boards\XMC1400_Boot_Kit;..\..\..\Src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -916,11 +916,11 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\Src\Devices\CMSIS\Include;..\..\..\Src\Devices\XMC1400_series\Include;..\..\..\Src\Devices\XMClib\inc;..\..\..\Src</IncludePath>
+              <IncludePath>..\..\..\Src\Devices\CMSIS\Include;..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Include;..\..\..\Src\Devices\Infineon\XMC\XMClib\inc;..\..\..\Src\Boards\XMC1400_Boot_Kit;..\..\..\Src</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -929,7 +929,7 @@
             <TextAddressRange>0x10001000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\XMC1400_Boot_Kit.XMC1400_Boot_Kit.sct</ScatterFile>
+            <ScatterFile>..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Source\ARM\XMC1400x0200_ac5.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
