@@ -28,10 +28,10 @@ static const Lunar_Main_ConfigItem_t mainConfig =
    // Version Info
    .version = {
       .major = 0,
-      .minor = 1,
+      .minor = 2,
       .build = 0,
    },
-   .productId = 1404U,
+   .productId = 152U,
 	// 1 = Release Configuration, 0 = Debug Configuration
 #ifdef RELEASE_TARGET	
 	.releaseTarget = 1,
@@ -39,7 +39,7 @@ static const Lunar_Main_ConfigItem_t mainConfig =
 	.releaseTarget = 0,
 #endif	
    .productName = {
-      .stringValue = "XMC1400 Boot Kit    "
+      .stringValue = "Nucleo-L152RE       "
    }
 };
 
