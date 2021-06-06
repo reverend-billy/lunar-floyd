@@ -42,9 +42,24 @@ typedef enum
    GPIO_DIRECTION_Count
 } GPIO_Direction_t;
 
+// Enumeration to defines the direction of the GPIO pin used for configuration
+typedef enum 
+{
+   // Pin has no pull mode (floating)
+   GPIO_PULLMODE_NONE,
+   // Pin is configured with pullup
+   GPIO_PULLMODE_UP,
+   // Pin is configured with pulldown
+   GPIO_PULLMODE_DOWN,
+   // This defines the total number of enumerated GPIO Pull Modes
+   GPIO_PULLMODE_Count
+} GPIO_PullMode_t;
+
 // Structure to define the configuration options for a GPIO input
 typedef struct
 {
+   // Mode for pullup/pulldown configuration
+   GPIO_PullMode_t pullMode;
    // Not implemented
    uint16_t debounceCount;
 } GPIO_InputConfig_t;

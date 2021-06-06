@@ -20,6 +20,7 @@
 // Private Constants
 *******************************************************************************/
 
+// Value return by vendor API when pin is set
 #define PIN_HIGH_VALUE (1U)
 
 

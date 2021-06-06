@@ -116,7 +116,7 @@ static void SetLedState(const bool newEnableState)
    {
       // State is changing, update it
 		// Note that the GPIO driver will handle translation for active low
-      GPIO_Drv_Write(GPIO_LED1, newEnableState);
+      GPIO_Drv_Write(GPIO_CHANNEL_LED1, newEnableState);
 		// Store the new state
       status.currentLEDState = newEnableState;
    }
@@ -160,7 +160,7 @@ void LEDMgr_Init(void)
 
    // Make sure LED is off to begin with
 	// GPIO_Drv_Init will init the output to active high or low based on the config info given
-	GPIO_Drv_Write(GPIO_LED1, false);
+	GPIO_Drv_Write(GPIO_CHANNEL_LED1, false);
 	status.currentLEDState = false;	
 
    // Start the LED at the normal blink rate

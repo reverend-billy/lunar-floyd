@@ -18,9 +18,9 @@ extern "C"
 typedef enum
 {
    // This pin is used for device status and flashing error codes
-   GPIO_LED1,
+   GPIO_CHANNEL_LED1,
    // A second LED used for development
-   GPIO_LED2,
+   GPIO_CHANNEL_LED2,
    // This defines the total number of enumerated GPIO values
    GPIO_CHANNEL_Count
 } GPIO_Channel_t;
