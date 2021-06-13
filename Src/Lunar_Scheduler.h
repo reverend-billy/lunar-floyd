@@ -19,23 +19,23 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 // This is the type definition for all scheduled functions.
 typedef void (*Lunar_Scheduler_Function_t)(void);
 
-// This is the structure for each scheduler entry. Interval is
-// the number of scheduler ticks (milliseconds) in which this
-// function is to be called. ScheduledFunction is the address
-// of the scheduled function.
-// Each entry should have an Interval, and a pointer to the
-// function to be called.
+/** This is the structure for each scheduler entry. Interval is
+  * the number of scheduler ticks (milliseconds) in which this
+  * function is to be called. scheduledFunction is the address of
+  * the scheduled function. Each entry should have an Interval,
+  * and a pointer to the function to be called.                  
+*/
 typedef struct
 {
    // Seconds portion of the interval in which the specified function
@@ -48,7 +48,7 @@ typedef struct
 
    // This is the pointer to the function that is being scheduled.
    const Lunar_Scheduler_Function_t scheduledFunction;
-} Lunar_Scheduler_Item_t;
+} Lunar_Scheduler_ConfigItem_t;
 
 
 /*******************************************************************************
@@ -59,7 +59,7 @@ typedef struct
   *    This function initializes the Scheduler module and starts a
   *    software timer for each configured module.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                               
 */
 void Lunar_Scheduler_Init(void);
@@ -72,7 +72,7 @@ void Lunar_Scheduler_Init(void);
  *     item is expired, the function pointer for that scheduled item is 
  *     executed.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void Lunar_Scheduler_Execute(void);

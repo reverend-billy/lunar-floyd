@@ -16,17 +16,17 @@
 
 
 /*******************************************************************************
-// Private Constants
+// Private Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Private Types
+// Private Type Declarations
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Private Variables
+// Private Variable Definitions
 *******************************************************************************/
 
 // Variable used in the Hard Fault handler to allow a convenient place for
@@ -39,13 +39,18 @@ static volatile unsigned int _Continue = 0U;
 *******************************************************************************/
 
 /*******************************************************************************
+// Private Function Implementations
+*******************************************************************************/
+
+
+/*******************************************************************************
 // Public Function Implementations
 *******************************************************************************/
 
 // C entry point
 int main(void)
 {
-   // The Core Main moudle privide a single entry point for starting up the system
+   // The Core Main module privide a single entry point for starting up the system
    // It will initialize all configured modules and start the system scheduler
    // *** NOTE THIS WILL NOT RETURN ***
    Lunar_Main_Execute();
@@ -53,11 +58,6 @@ int main(void)
    // Standard C exit code
    return(EXIT_SUCCESS);
 }
-
-
-/*******************************************************************************
-// Private Function Implementations
-*******************************************************************************/
 
 
 /*******************************************************************************

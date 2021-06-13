@@ -16,17 +16,17 @@
 
 
 /*******************************************************************************
-// Private Constants
+// Private Constant Definitions
 *******************************************************************************/
 
 // Determines the number of initialization functions in the configuration table.
 // This value is automatically computed at compilation based on the size of the
 // table.
-#define NUM_INIT_FUNTIONS (sizeof(initMgrConfigTable)/sizeof(Lunar_InitMgr_ConfigTableItem_t))
+#define NUM_INIT_FUNTIONS (sizeof(initMgrConfigTable)/sizeof(Lunar_InitMgr_ConfigItem_t))
 
 
 /*******************************************************************************
-// Private Types
+// Private Type Declarations
 *******************************************************************************/
 
 // This structure defines the internal variables used by the module
@@ -38,7 +38,7 @@ typedef struct
 
 
 /*******************************************************************************
-// Private Variables
+// Private Variable Definitions
 *******************************************************************************/
 
 // The variable used for holding all internal data for this module.
@@ -47,6 +47,11 @@ static InitMgr_Status_t status;
 
 /*******************************************************************************
 // Private Function Declarations
+*******************************************************************************/
+
+
+/*******************************************************************************
+// Private Function Implementations
 *******************************************************************************/
 
 

@@ -1,7 +1,6 @@
 /*******************************************************************************
 // GPIO Driver
 *******************************************************************************/
-
 #pragma once
 
 #ifdef __cplusplus
@@ -23,46 +22,46 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 // Enumeration to defines the direction of the GPIO pin used for configuration
 typedef enum 
 {
    // Pin is to be configured as an input
-   GPIO_DIRECTION_INPUT,
+   GPIO_DRV_DIRECTION_INPUT,
    // Pin is to be configured as an output
-   GPIO_DIRECTION_OUTPUT,
+   GPIO_DRV_DIRECTION_OUTPUT,
    // This defines the total number of enumerated GPIO Direction values
-   GPIO_DIRECTION_Count
-} GPIO_Direction_t;
+   GPIO_DRV_DIRECTION_Count
+} GPIO_Drv_Direction_t;
 
 // Enumeration to defines the direction of the GPIO pin used for configuration
 typedef enum 
 {
    // Pin has no pull mode (floating)
-   GPIO_PULLMODE_NONE,
+   GPIO_DRV_PULLMODE_NONE,
    // Pin is configured with pullup
-   GPIO_PULLMODE_UP,
+   GPIO_DRV_PULLMODE_UP,
    // Pin is configured with pulldown
-   GPIO_PULLMODE_DOWN,
+   GPIO_DRV_PULLMODE_DOWN,
    // This defines the total number of enumerated GPIO Pull Modes
-   GPIO_PULLMODE_Count
-} GPIO_PullMode_t;
+   GPIO_DRV_PULLMODE_Count
+} GPIO_Drv_PullMode_t;
 
 // Structure to define the configuration options for a GPIO input
 typedef struct
 {
    // Mode for pullup/pulldown configuration
-   GPIO_PullMode_t pullMode;
+   GPIO_Drv_PullMode_t pullMode;
    // Not implemented
    uint16_t debounceCount;
-} GPIO_InputConfig_t;
+} GPIO_Drv_InputConfig_t;
 
 // Structure to define the configuration options for a GPIO output
 typedef struct
@@ -74,13 +73,13 @@ typedef struct
      * low pins.                                                 
    */
    bool initialEnableState;
-} GPIO_OutputConfig_t;
+} GPIO_Drv_OutputConfig_t;
 
 // This is the structure for each entry in the GPIO configuration table
 typedef struct
 {
    // Defines the input or output state for the pin
-   GPIO_Direction_t direction;
+   GPIO_Drv_Direction_t direction;
 
    // The provides a structure to define the device-specific port and pin.
    // This prevents requiring device driver references in this structure directly.
@@ -90,16 +89,11 @@ typedef struct
    union
    {
 		// Options when pin is configured as input
-      GPIO_InputConfig_t gpioInput;
+      GPIO_Drv_InputConfig_t gpioInput;
 		/// Option when pin is configured as output
-      GPIO_OutputConfig_t gpioOutput;
+      GPIO_Drv_OutputConfig_t gpioOutput;
    } gpioConfig;
-} GPIO_Config_t;
-
-
-/*******************************************************************************
-// Public Variables
-*******************************************************************************/
+} GPIO_Drv_ConfigItem_t;
 
 
 /*******************************************************************************
@@ -112,7 +106,7 @@ typedef struct
   *    timers and function scheduling.  Some devices may be able to read
   *    directly from a SysTick register.  
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void GPIO_Drv_Init(void);
@@ -125,10 +119,10 @@ void GPIO_Drv_Init(void);
   * Parameters: 
   *    channel - The configured GPIO pin that is to be toggled.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-void GPIO_Drv_Toggle(const GPIO_Channel_t channel);
+void GPIO_Drv_Toggle(const GPIO_Drv_Channel_t channel);
 
 
 /** Description:
@@ -144,10 +138,10 @@ void GPIO_Drv_Toggle(const GPIO_Channel_t channel);
   *    true - Configured active state
   *    false - Configured inactive state
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-bool GPIO_Drv_Read(const GPIO_Channel_t channel);
+bool GPIO_Drv_Read(const GPIO_Drv_Channel_t channel);
 
 
 /** Description:
@@ -160,10 +154,10 @@ bool GPIO_Drv_Read(const GPIO_Channel_t channel);
   *    enableState - The desired output state to be written. (true: Configured
   *    active state, false: Configured inactive state)
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-void GPIO_Drv_Write(const GPIO_Channel_t channel, const bool enableState);
+void GPIO_Drv_Write(const GPIO_Drv_Channel_t channel, const bool enableState);
 
 
 #ifdef __cplusplus

@@ -1,6 +1,6 @@
 /*******************************************************************************
 // LED Manager Configuration
-*******************************************************************************/
+*******************************************************************************/ 
 #pragma once
 
 #ifdef __cplusplus
@@ -15,12 +15,13 @@ extern "C"
 // Module Include
 #include "LEDMgr.h"
 // Platform Includes
+#include "Lunar_ErrorMgr.h"
 // Other Includes
 #include "xmc_gpio.h"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 // This table defines the number of LED flashes that will be used for the
@@ -30,12 +31,14 @@ extern "C"
 // a higher priority error then occurs, the pattern will change to the new
 // error pattern.  Flash code of 1 is hard to tell from standard blinking, 
 // so it is not used
-static const LEDMgr_FlashCodeItem_t ledFlashCodeTable[] =
+static const LEDMgr_FlashCodeItem_t ledMgrFlashCodeTable[] =
 {
    // Error, Number of Flashes
    // {NOTE_1_BLINK_NOT_USED, 1}
-   { 0 }
+   { LUNAR_ERRORMGR_ERROR_RAM_CHECK_FAILED, 2 },
+   { LUNAR_ERRORMGR_ERROR_VOLTAGE_LOW, 3 }
 };
+
 
 #ifdef __cplusplus
 extern "C"

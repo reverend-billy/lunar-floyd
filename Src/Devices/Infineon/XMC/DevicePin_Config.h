@@ -1,14 +1,12 @@
 /*******************************************************************************
 // Device Pin Definition
 *******************************************************************************/
-
 #pragma once
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
 
 /*******************************************************************************
 // Includes
@@ -22,23 +20,26 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
-// This is the pin definition values used by the XMCLib.  Each processor library
-// will have a diffent way of specifying these.
+/** This is the pin definition values used by the XMCLib. Each
+  * processor library will have a different way of specifying
+  * these.                                                    
+*/
 typedef struct
 {
-	// XMCLib port definition
-	// It will be a pointer to the register for the the port
+   /** XMCLib port definition It will be a pointer to the register
+     * for the port                                               
+   */
    XMC_GPIO_PORT_t *port;
-	// XMCLib just uses uint8_t for defining the pin for a specific port
-	// The API will often use the value for shifting to build a mask
+   // XMCLib just uses uint8_t for defining the pin for a specific port
+   // The API will often use the value for shifting to build a mask
    uint8_t pin;
 } DevicePin_Config_t;
 

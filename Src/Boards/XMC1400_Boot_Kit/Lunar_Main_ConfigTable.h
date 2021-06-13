@@ -19,11 +19,11 @@ extern "C"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 // Configuration data for identifying the firmware and product
-static const Lunar_Main_ConfigItem_t mainConfig = 
+static const Lunar_Main_ConfigItem_t mainConfigTable = 
 {
    // Version Info
    .version = {

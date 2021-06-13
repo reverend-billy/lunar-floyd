@@ -1,6 +1,7 @@
 /*******************************************************************************
 // Reset Driver
 *******************************************************************************/
+
 #pragma once
 
 #ifdef __cplusplus
@@ -20,12 +21,12 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 
@@ -38,7 +39,7 @@ extern "C"
   *    reset reason will be stored for later query by the Reset_GetResetReason
   *    function.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void Reset_Drv_Init(void);
@@ -47,7 +48,7 @@ void Reset_Drv_Init(void);
   *    This function will reset the device as soon as possible.  The
   *    implementation depends on the hardware.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void Reset_Drv_Execute(void);
@@ -58,7 +59,7 @@ void Reset_Drv_Execute(void);
   *    uint32_t - A 32-bit value define the system-specific reason for the
   *    previous device reset.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                 
 */
 uint32_t Reset_Drv_GetResetReason(void);

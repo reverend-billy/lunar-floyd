@@ -9,8 +9,9 @@ extern "C"
 {
 #endif
 
+
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 // Defines the enumeration of the configured GPIO pins
@@ -18,12 +19,13 @@ extern "C"
 typedef enum
 {
    // This pin is used for device status and flashing error codes
-   GPIO_CHANNEL_LED1,
+   GPIO_DRV_CHANNEL_LED_STATUS,
    // A second LED used for development
-   GPIO_CHANNEL_LED2,
+   GPIO_DRV_CHANNEL_LED_ALT,
    // This defines the total number of enumerated GPIO values
-   GPIO_CHANNEL_Count
-} GPIO_Channel_t;
+   GPIO_DRV_CHANNEL_Count
+} GPIO_Drv_Channel_t;
+
 
 #ifdef __cplusplus
 extern "C"

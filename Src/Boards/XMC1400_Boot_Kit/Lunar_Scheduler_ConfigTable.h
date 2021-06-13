@@ -14,23 +14,25 @@ extern "C"
 // Module Includes
 #include "Lunar_Scheduler.h"
 // Platform Includes
+#include "Lunar_Serial.h"
 // Other Includes
 #include "LEDMgr.h"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 /** This is the scheduler table -- it contains an entry for each
-  * scheduled function. The entries are Lunar_Scheduler_Item_t
+  * scheduled function. The entries are Lunar_Scheduler_ConfigItem_t
   * structure, containing an interval in seconds and milliseconds
   * and specifies the function to be called.                     
 */
-static const Lunar_Scheduler_Item_t schedulerConfigTable[] =
+static const Lunar_Scheduler_ConfigItem_t schedulerConfigTable[] =
 {
    // { s, ms, Pointer To Scheduled Function }
    // { 0, 5, Watchdog_Update},
+   { 0,   10, Lunar_Serial_Update },
    { 0,   50, LEDMgr_Update }
 };
 

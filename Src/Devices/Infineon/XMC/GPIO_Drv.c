@@ -5,8 +5,6 @@
 /*******************************************************************************
 // Includes
 *******************************************************************************/
-
-
 // Module Includes
 #include "GPIO_Drv.h" // Driver API
 #include "GPIO_Drv_Config.h" // Defines channel enumeration
@@ -17,7 +15,7 @@
 
 
 /*******************************************************************************
-// Private Constants
+// Private Constant Definitions
 *******************************************************************************/
 
 // Value return by vendor API when pin is set
@@ -25,7 +23,7 @@
 
 
 /*******************************************************************************
-// Private Types
+// Private Type Declarations
 *******************************************************************************/
 
 // This structure defines the internal variables used by the module
@@ -33,12 +31,12 @@ typedef struct
 {
    // Current output enable state for each configured pin
    // Only used for outputs since inputs are read directly
-   bool outputEnableState[GPIO_CHANNEL_Count];
+   bool outputEnableState[GPIO_DRV_CHANNEL_Count];
 } GPIO_Drv_t;
 
 
 /*******************************************************************************
-// Private Variables
+// Private Variable Definitions
 *******************************************************************************/
 
 // The variable used for holding all internal data for this module.
@@ -52,8 +50,10 @@ static GPIO_Drv_t status;
 /** Description:
   *    Function to start the timer for a scheduled function.
   * Parameters:
-  *    channel - The configured GPIO pin that is being queried
-  *    functionIndex - Index into the Lunar_Scheduler_configTable
+ *     channel - The configured GPIO pin that is being queried
+ *     enableState - The desired enable state for the pin. Note that
+ *                   the actual value may be inverted based upon the pin
+ *                   configuration.
   * Returns:
   *    XMC_GPIO_OUTPUT_LEVEL_t - The XMCLib output level based on the requested
   *    enableState and pin configuration.
@@ -61,10 +61,39 @@ static GPIO_Drv_t status;
  *    XMC_GPIO_OUTPUT_LEVEL_LOW - XMCLib Reset (0x10000U)
  *    XMC_GPIO_OUTPUT_LEVEL_HIGH  - XMCLib Set (0x1U)
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-XMC_GPIO_OUTPUT_LEVEL_t GetXMCOutputLevel(const GPIO_Channel_t channel, const bool enableState);
+XMC_GPIO_OUTPUT_LEVEL_t GetXMCOutputLevel(const GPIO_Drv_Channel_t channel, const bool enableState);
+
+
+/*******************************************************************************
+// Private Function Implementations
+*******************************************************************************/
+
+// Determine the corect output level for the XMCLib function
+XMC_GPIO_OUTPUT_LEVEL_t GetXMCOutputLevel(const GPIO_Drv_Channel_t channel, const bool enableState)
+{
+   // Init the output to low
+   XMC_GPIO_OUTPUT_LEVEL_t outputLevel = XMC_GPIO_OUTPUT_LEVEL_LOW;
+
+	// Store the channel configuration for easier access
+	const GPIO_Drv_ConfigItem_t *xmcGPIOConf = &gpioConfigTable[channel];
+
+   // AL & True  = RESET
+   // AH & True  = SET
+   // AL & False = SET
+   // AH & False = RESET
+   if (((xmcGPIOConf->gpioConfig.gpioOutput.isActiveHigh) && (enableState)) || ((!xmcGPIOConf->gpioConfig.gpioOutput.isActiveHigh) && (!enableState)))
+   {
+      // The XMC driver value used for high output
+      outputLevel = XMC_GPIO_OUTPUT_LEVEL_HIGH;
+   }
+   // else output low value
+
+   // Finally, return the result
+   return(outputLevel);
+}
 
 
 /*******************************************************************************
@@ -76,10 +105,10 @@ void GPIO_Drv_Init(void)
 {
    // Variable required for calling XMCLib GPIO functions
    XMC_GPIO_CONFIG_t xmcGPIOConf;
-	const GPIO_Config_t *gpioConfig;
+	const GPIO_Drv_ConfigItem_t *gpioConfig;
 	
    // Loop through each GPIO entry and configure it
-   for (uint8_t channel = 0U; channel < GPIO_CHANNEL_Count; channel++)
+   for (uint8_t channel = 0U; channel < GPIO_DRV_CHANNEL_Count; channel++)
    {	
 		// Store the channel configuration for easier access
 		gpioConfig = &gpioConfigTable[channel];
@@ -88,13 +117,13 @@ void GPIO_Drv_Init(void)
       memset( &xmcGPIOConf, 0, sizeof(XMC_GPIO_CONFIG_t) );
    
 		// Determine direction for this pin
-		if (gpioConfig->direction == GPIO_DIRECTION_OUTPUT)
+		if (gpioConfig->direction == GPIO_DRV_DIRECTION_OUTPUT)
 		{
 			// Configure as output push/pull
 			xmcGPIOConf.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
 
          // Determine the correct output value based on the intial configuration state 
-         xmcGPIOConf.output_level = GetXMCOutputLevel((GPIO_Channel_t)channel, gpioConfig->gpioConfig.gpioOutput.initialEnableState);
+         xmcGPIOConf.output_level = GetXMCOutputLevel((GPIO_Drv_Channel_t)channel, gpioConfig->gpioConfig.gpioOutput.initialEnableState);
 
          // Store the new level
          status.outputEnableState[channel] = gpioConfig->gpioConfig.gpioOutput.initialEnableState;
@@ -124,18 +153,18 @@ void GPIO_Drv_Init(void)
 }
 
 // Read the current state of the given pin
-bool GPIO_Drv_Read(const GPIO_Channel_t channel)
+bool GPIO_Drv_Read(const GPIO_Drv_Channel_t channel)
 {
    bool enableState = false;
 
    // Verify the given channel is valid
-   if (channel < GPIO_CHANNEL_Count)
+   if (channel < GPIO_DRV_CHANNEL_Count)
    {
 		// Store the channel configuration for easier access
-		const GPIO_Config_t *gpioConfig = &gpioConfigTable[channel];
+		const GPIO_Drv_ConfigItem_t *gpioConfig = &gpioConfigTable[channel];
 		
 		// Verify the pin is configured for input
-		if (gpioConfig->direction == GPIO_DIRECTION_INPUT)
+		if (gpioConfig->direction == GPIO_DRV_DIRECTION_INPUT)
 		{
          // XMC GPIO returns 1 if pin is set, 0 otherwise
          enableState = (XMC_GPIO_GetInput(gpioConfig->devicePin.port, gpioConfig->devicePin.pin) == PIN_HIGH_VALUE);
@@ -152,16 +181,16 @@ bool GPIO_Drv_Read(const GPIO_Channel_t channel)
 }
 
 // Writes the desired value to the given pin
-void GPIO_Drv_Write(const GPIO_Channel_t channel, bool enableState)
+void GPIO_Drv_Write(const GPIO_Drv_Channel_t channel, bool enableState)
 {
    // Verify the given channel is valid
-   if (channel < GPIO_CHANNEL_Count)
+   if (channel < GPIO_DRV_CHANNEL_Count)
    {
 		// Store the channel configuration for easier access
-		const GPIO_Config_t *gpioConfig = &gpioConfigTable[channel];
+		const GPIO_Drv_ConfigItem_t *gpioConfig = &gpioConfigTable[channel];
 		
 		// Verify the pin is configured for output
-		if (gpioConfig->direction == GPIO_DIRECTION_OUTPUT)
+		if (gpioConfig->direction == GPIO_DRV_DIRECTION_OUTPUT)
 		{
 			// Pin valid and set as output, write the new value
    		XMC_GPIO_SetOutputLevel(gpioConfig->devicePin.port, gpioConfig->devicePin.pin, GetXMCOutputLevel(channel, enableState));
@@ -173,16 +202,16 @@ void GPIO_Drv_Write(const GPIO_Channel_t channel, bool enableState)
 }
 
 // Toggle the output state of the given pin
-void GPIO_Drv_Toggle(const GPIO_Channel_t channel)
+void GPIO_Drv_Toggle(const GPIO_Drv_Channel_t channel)
 {
    // Verify the given channel is valid
-   if (channel < GPIO_CHANNEL_Count)
+   if (channel < GPIO_DRV_CHANNEL_Count)
    {
 		// Store the channel configuration for easier access
-		const GPIO_Config_t *gpioConfig = &gpioConfigTable[channel];
+		const GPIO_Drv_ConfigItem_t *gpioConfig = &gpioConfigTable[channel];
 		
 		// Verify the pin is configured for output
-		if (gpioConfig->direction == GPIO_DIRECTION_OUTPUT)
+		if (gpioConfig->direction == GPIO_DRV_DIRECTION_OUTPUT)
 		{
 			// Toggle the given pin for the given channel
 			XMC_GPIO_ToggleOutput(gpioConfig->devicePin.port, gpioConfig->devicePin.pin);
@@ -191,34 +220,5 @@ void GPIO_Drv_Toggle(const GPIO_Channel_t channel)
          status.outputEnableState[channel] = !status.outputEnableState[channel];
 		}
    }
-}
-
-
-/*******************************************************************************
-// Private Function Implementations
-*******************************************************************************/
-
-// Determine the corect output level for the XMCLib function
-XMC_GPIO_OUTPUT_LEVEL_t GetXMCOutputLevel(const GPIO_Channel_t channel, const bool enableState)
-{
-   // Init the output to low
-   XMC_GPIO_OUTPUT_LEVEL_t outputLevel = XMC_GPIO_OUTPUT_LEVEL_LOW;
-
-	// Store the channel configuration for easier access
-	const GPIO_Config_t *xmcGPIOConf = &gpioConfigTable[channel];
-
-   // AL & True  = RESET
-   // AH & True  = SET
-   // AL & False = SET
-   // AH & False = RESET
-   if (((xmcGPIOConf->gpioConfig.gpioOutput.isActiveHigh) && (enableState)) || ((!xmcGPIOConf->gpioConfig.gpioOutput.isActiveHigh) && (!enableState)))
-   {
-      // The XMC driver value used for high output
-      outputLevel = XMC_GPIO_OUTPUT_LEVEL_HIGH;
-   }
-   // else output low value
-
-   // Finally, return the result
-   return(outputLevel);
 }
 

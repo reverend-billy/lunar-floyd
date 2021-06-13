@@ -11,6 +11,7 @@ extern "C"
 /*******************************************************************************
 // Includes
 *******************************************************************************/
+
 // Module Includes
 #include "GPIO_Drv.h"
 #include "GPIO_Drv_Config.h" // Defines channel enumeration
@@ -21,16 +22,16 @@ extern "C"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 // This table defines the configuration for each GPIO pin used by the common GPIO
 // driver.  Each pin will be initialized in the GPIO_Drv_Init function.
-static const GPIO_Config_t gpioConfigTable[GPIO_CHANNEL_Count] =
+static const GPIO_Drv_ConfigItem_t gpioConfigTable[GPIO_DRV_CHANNEL_Count] =
 {
    // LED 1
    {
-      .direction = GPIO_DIRECTION_OUTPUT,
+      .direction = GPIO_DRV_DIRECTION_OUTPUT,
       .devicePin = {
          .port = XMC_GPIO_PORT4,
          .pin = 0
@@ -42,7 +43,7 @@ static const GPIO_Config_t gpioConfigTable[GPIO_CHANNEL_Count] =
    },
    // LED 2
    {
-      .direction = GPIO_DIRECTION_OUTPUT,
+      .direction = GPIO_DRV_DIRECTION_OUTPUT,
       .devicePin =
       {
          .port = XMC_GPIO_PORT4,
