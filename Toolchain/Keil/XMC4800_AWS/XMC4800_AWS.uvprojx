@@ -509,6 +509,11 @@
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\Reset_Drv.c</FilePath>
             </File>
             <File>
+              <FileName>RTC_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\RTC_Drv.c</FilePath>
+            </File>
+            <File>
               <FileName>SysTick_Drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\SysTick_Drv.c</FilePath>
@@ -518,10 +523,27 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\Timebase_Drv.c</FilePath>
             </File>
+            <File>
+              <FileName>UART_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\UART_Drv.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Board</GroupName>
+          <Files>
+            <File>
+              <FileName>ReportMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC4800_AWS\ReportMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC4800_AWS\Control.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Source</GroupName>
@@ -535,6 +557,21 @@
               <FileName>LEDMgr.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\LEDMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_CircularBufferLib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_CircularBufferLib.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_ErrorMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_ErrorMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_EventMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_EventMgr.c</FilePath>
             </File>
             <File>
               <FileName>Lunar_InitMgr.c</FileName>
@@ -552,9 +589,19 @@
               <FilePath>..\..\..\Src\Lunar_MathLib.c</FilePath>
             </File>
             <File>
+              <FileName>Lunar_MessageRouter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_MessageRouter.c</FilePath>
+            </File>
+            <File>
               <FileName>Lunar_Scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Lunar_Scheduler.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_Serial.c</FilePath>
             </File>
             <File>
               <FileName>Lunar_SoftTimerLib.c</FileName>
@@ -1068,6 +1115,11 @@
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\Reset_Drv.c</FilePath>
             </File>
             <File>
+              <FileName>RTC_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\RTC_Drv.c</FilePath>
+            </File>
+            <File>
               <FileName>SysTick_Drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\SysTick_Drv.c</FilePath>
@@ -1077,10 +1129,27 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\Timebase_Drv.c</FilePath>
             </File>
+            <File>
+              <FileName>UART_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\UART_Drv.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Board</GroupName>
+          <Files>
+            <File>
+              <FileName>ReportMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC4800_AWS\ReportMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC4800_AWS\Control.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Source</GroupName>
@@ -1094,6 +1163,21 @@
               <FileName>LEDMgr.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\LEDMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_CircularBufferLib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_CircularBufferLib.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_ErrorMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_ErrorMgr.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_EventMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_EventMgr.c</FilePath>
             </File>
             <File>
               <FileName>Lunar_InitMgr.c</FileName>
@@ -1111,9 +1195,19 @@
               <FilePath>..\..\..\Src\Lunar_MathLib.c</FilePath>
             </File>
             <File>
+              <FileName>Lunar_MessageRouter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_MessageRouter.c</FilePath>
+            </File>
+            <File>
               <FileName>Lunar_Scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Lunar_Scheduler.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lunar_Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Lunar_Serial.c</FilePath>
             </File>
             <File>
               <FileName>Lunar_SoftTimerLib.c</FileName>

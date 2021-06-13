@@ -1,7 +1,6 @@
 /*******************************************************************************
-// Timebase Module
+// Timebase Driver
 *******************************************************************************/
-
 #pragma once
 
 #ifdef __cplusplus
@@ -17,32 +16,28 @@ extern "C"
 // Platform Includes
 // Other Includes
 #include <stdint.h> // Integer types
+#include <time.h>
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Variables
-*******************************************************************************/
-
-
-/*******************************************************************************
-// Public Prototypes
+// Public Function Declarations
 *******************************************************************************/
 
 /** Description:
   *    This function initializes the Timebase driver used for
   *    software timers and function scheduling.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                          
 */
 void Timebase_Drv_Init(void);
@@ -53,7 +48,7 @@ void Timebase_Drv_Init(void);
   * Returns: 
   *    uint32_t - The current 32-bit timebase value of the 32-bit
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 uint32_t Timebase_Drv_GetCurrentTickCount(void);

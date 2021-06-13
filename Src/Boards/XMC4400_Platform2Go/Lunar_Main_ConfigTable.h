@@ -19,19 +19,25 @@ extern "C"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 // Configuration data for identifying the firmware and product
-static const Lunar_Main_ConfigItem_t mainConfig = 
+static const Lunar_Main_ConfigItem_t mainConfigTable = 
 {
    // Version Info
    .version = {
       .major = 0,
-      .minor = 1,
+      .minor = 2,
       .build = 0,
    },
    .productId = 4400U,
+	// 1 = Release Configuration, 0 = Debug Configuration
+#ifdef RELEASE_TARGET	
+	.releaseTarget = 1,
+#else
+	.releaseTarget = 0,
+#endif	
    .productName = {
       .stringValue = "XMC4400 Platform2Go "
    }

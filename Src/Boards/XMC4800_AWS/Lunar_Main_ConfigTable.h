@@ -19,16 +19,16 @@ extern "C"
 
 
 /*******************************************************************************
-// Constant Configuration Variables
+// Constant Configuration Variable Declarations
 *******************************************************************************/
 
 // Configuration data for identifying the firmware and product
-static const Lunar_Main_ConfigItem_t mainConfig = 
+static const Lunar_Main_ConfigItem_t mainConfigTable = 
 {
    // Version Info
    .version = {
       .major = 0,
-      .minor = 1,
+      .minor = 2,
       .build = 0,
    },
    .productId = 4800U,

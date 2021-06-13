@@ -1,7 +1,6 @@
 /*******************************************************************************
 // SysTick Driver
 *******************************************************************************/
-
 #pragma once
 
 #ifdef __cplusplus
@@ -19,17 +18,12 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
-*******************************************************************************/
-
-
-/*******************************************************************************
-// Public Variables
+// Public Type Declarations
 *******************************************************************************/
 
 
@@ -43,7 +37,7 @@ extern "C"
   *    timers and function scheduling.  Some devices may be able to read
   *    directly from a SysTick register.  
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void SysTick_Drv_Init(void);
@@ -54,7 +48,7 @@ void SysTick_Drv_Init(void);
   * Returns: 
   *    uint32_t - The current value of the 32-bit SysTick
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 uint32_t SysTick_Drv_GetCurrentTickCount(void);

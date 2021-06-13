@@ -20,27 +20,18 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
-
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
-
-
-
-/*******************************************************************************
-// Public Variables
-*******************************************************************************/
-
 
 
 /*******************************************************************************
 // Public Function Declarations
 *******************************************************************************/
-
 
 /** Description:
   *    Calculates the sum of two values without wrapping. If the sum
@@ -57,7 +48,7 @@ extern "C"
   *    \< UINT32_MAX :  The calculated sum if it can be contained in
   *                     a 32\-bit unsigned integer.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                 
 */
 uint32_t Lunar_MathLib_AddSaturateUint32(uint32_t const value1, uint32_t const value2);
@@ -74,7 +65,7 @@ uint32_t Lunar_MathLib_AddSaturateUint32(uint32_t const value1, uint32_t const v
   *    0 :     \Returns 0 if value2 \>= value1 to prevent wrapping
   *    \> 0 :  \Returns non\-zero value if value2 \< value1
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                 
 */
 uint32_t Lunar_MathLib_SubtractSaturateUint32(const uint32_t value1, const uint32_t value2);

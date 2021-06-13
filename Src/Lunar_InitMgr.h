@@ -18,12 +18,12 @@ extern "C"
 #include <stdbool.h>
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 
@@ -36,7 +36,7 @@ typedef struct
 {
    // The function to be called for this module
    const Lunar_InitMgr_Function_t initFunction;
-} Lunar_InitMgr_ConfigTableItem_t;
+} Lunar_InitMgr_ConfigItem_t;
 
 
 
@@ -48,7 +48,7 @@ typedef struct
   *    This function will call each initialization, in order, as defined in the
   *    configuration table for this module.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 void Lunar_InitMgr_Execute(void);
@@ -62,7 +62,7 @@ void Lunar_InitMgr_Execute(void);
   *    true :   All module initialization is complete.
   *    false :  Some modules may be uninitialized.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                
 */
 bool Lunar_InitMgr_GetInitializationState(void);

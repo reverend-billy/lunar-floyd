@@ -1,7 +1,6 @@
 /*******************************************************************************
 // Software Timer Library
 *******************************************************************************/
-
 #pragma once
 
 #ifdef __cplusplus
@@ -15,13 +14,14 @@ extern "C"
 
 // Module Includes
 // Platform Includes
+#include "Platform.h"
 // Other Includes
 #include <stdbool.h> // Boolean type
 #include <stdint.h> // Integer types
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 // The maximum duration for a timer. We allow for 32 days to hold a month and
@@ -44,7 +44,7 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 // Structure that represents a timer object
@@ -84,15 +84,15 @@ typedef struct
 *******************************************************************************/
 
 /** Description:
-  *    This function initialized the given timer structure.  The timer will be
+  *    This function initializes the given timer structure.  The timer will be
   *    marked as stopped.
   * Parameters: 
   *    timer - A pointer to a common software timer structure.  
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-void Lunar_SoftTimerLib_Init(Lunar_SoftTimerLib_Timer_t *timer);
+void Lunar_SoftTimerLib_Init(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    Start a countdown timer with the specified duration. Note that the value
@@ -103,20 +103,20 @@ void Lunar_SoftTimerLib_Init(Lunar_SoftTimerLib_Timer_t *timer);
   *    timer - A pointer to the common software timer structure to be started.
   *    durationMilliseconds - The total number of milliseconds for timer.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-void Lunar_SoftTimerLib_StartTimer(Lunar_SoftTimerLib_Timer_t *timer, const uint32_t durationMilliseconds);
+void Lunar_SoftTimerLib_StartTimer(Lunar_SoftTimerLib_Timer_t *const timer, const uint32_t durationMilliseconds) PLATFORM_NON_NULL;
 
 /** Description:
   *    Stops the given timer.  Note that a stopped timer can never be expired.
   * Parameters: 
   *    timer - A pointer to the common software timer structure to be started.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-void Lunar_SoftTimerLib_StartTimerMeasurement(Lunar_SoftTimerLib_Timer_t *timer);
+void Lunar_SoftTimerLib_StartTimerMeasurement(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    Start a count up (measurement) timer. Use
@@ -126,10 +126,10 @@ void Lunar_SoftTimerLib_StartTimerMeasurement(Lunar_SoftTimerLib_Timer_t *timer)
   *    timer :  A pointer to the common software timer structure to be
   *             stopped.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                   
 */
-void Lunar_SoftTimerLib_StopTimer(Lunar_SoftTimerLib_Timer_t *timer);
+void Lunar_SoftTimerLib_StopTimer(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    Checks to see if a given timer is running. Note that expired timers are
@@ -143,10 +143,10 @@ void Lunar_SoftTimerLib_StopTimer(Lunar_SoftTimerLib_Timer_t *timer);
   *    true - The given timer is not stopped and is still running.
   *    false - The given timer is stopped.
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-bool Lunar_SoftTimerLib_IsTimerRunning(const Lunar_SoftTimerLib_Timer_t *timer);
+bool Lunar_SoftTimerLib_IsTimerRunning(const Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    Checks to see if a given timer is expired. Note that the timer must be
@@ -164,10 +164,10 @@ bool Lunar_SoftTimerLib_IsTimerRunning(const Lunar_SoftTimerLib_Timer_t *timer);
   *    true - The given timer is not stopped and the duration has expiration. 
   *    false - The given timer is running and the duration has not expired. 
   * History: 
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-bool Lunar_SoftTimerLib_IsTimerExpired(Lunar_SoftTimerLib_Timer_t *timer);
+bool Lunar_SoftTimerLib_IsTimerExpired(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    Returns the remaining time in milliseconds for a running timer.  Since a
@@ -178,10 +178,10 @@ bool Lunar_SoftTimerLib_IsTimerExpired(Lunar_SoftTimerLib_Timer_t *timer);
   * Returns:
   *    uint32_t - The remaining timer duration in milliseconds.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *const timer);
+uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    \Returns the elapsed time for a running count up
@@ -193,10 +193,10 @@ uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(Lunar_SoftTimerLib_Time
   *    uint32_t - The total number of milliseconds elapsed since the
   *    timer was started.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                   
 */
-uint32_t Lunar_SoftTimerLib_GetElapsedTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *timer);
+uint32_t Lunar_SoftTimerLib_GetElapsedTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /**
   * Description:
@@ -210,7 +210,7 @@ uint32_t Lunar_SoftTimerLib_GetElapsedTimeMilliseconds(Lunar_SoftTimerLib_Timer_
   *    uint32_t - The calculated total number of milliseconds for the given
   *    duration components.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
 uint32_t Lunar_SoftTimerLib_ConvertTimeToMilliseconds(const uint16_t hoursToConvert, const uint16_t minutesToConvert, const uint16_t secondsToConvert);
@@ -226,10 +226,10 @@ uint32_t Lunar_SoftTimerLib_ConvertTimeToMilliseconds(const uint16_t hoursToConv
   *                             be converted into duration
   *                             components.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                  
 */
-void Lunar_SoftTimerLib_ConvertMillisecondsToDuration(Lunar_SoftTimerLib_TimeDuration_t *duration, const uint32_t millisecondsToConvert);
+void Lunar_SoftTimerLib_ConvertMillisecondsToDuration(Lunar_SoftTimerLib_TimeDuration_t *const duration, const uint32_t millisecondsToConvert) PLATFORM_NON_NULL;
 
 /** Description:
   *    This will convert a given time in milliseconds to a time
@@ -257,10 +257,10 @@ void Lunar_SoftTimerLib_ConvertMillisecondsToDuration(Lunar_SoftTimerLib_TimeDur
   *    roundToMillisecondInterval :  The interval to be used for the
   *                                  rounding calculation.
   * History:
-  *    * 05/1/2021 : Function created (EJH)
+  *    * 5/1/2021: Function created (EJH)
   *                                                                  
 */
-void Lunar_SoftTimerLib_ConvertMillisecondsToRoundedDuration(Lunar_SoftTimerLib_TimeDuration_t *duration, const uint32_t millisecondsToConvert, const uint32_t roundToMillisecondInterval);
+void Lunar_SoftTimerLib_ConvertMillisecondsToRoundedDuration(Lunar_SoftTimerLib_TimeDuration_t *const duration, const uint32_t millisecondsToConvert, const uint32_t roundToMillisecondInterval) PLATFORM_NON_NULL;
 
 #ifdef __cplusplus
 extern "C"

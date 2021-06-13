@@ -21,19 +21,19 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
 
 // Defines the SysTick IRQ for the device
 #define SYSTICK_DRV_IRQ SysTick_IRQn
 
-/** Defines the IRQ priority used for the SysTick Note that the
-  * XMC1400 does not use priority grouping                     
+/** Defines the IRQ priority used for the SysTick. Note that the
+  * XMC1400 does not use priority grouping.                     
 */
 #define SYSTICK_DRV_IRQ_PRIORITY (63U)
 
-/** Defines the IRQ priority used for the SysTick
-  * XMC4000 series support grouping
+/** Defines the IRQ priority used for the SysTick. Note that the
+  * XMC4000 series support grouping.                            
 */
 #define SYSTICK_DRV_IRQ_SUBPRIORITY  (0U)
 
@@ -44,7 +44,7 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Types
+// Public Type Declarations
 *******************************************************************************/
 
 

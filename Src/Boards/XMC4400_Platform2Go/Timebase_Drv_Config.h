@@ -18,17 +18,18 @@ extern "C"
 // Other Includes
 
 /*******************************************************************************
-// Public Constants
+// Public Constant Definitions
 *******************************************************************************/
-
-/** The number of SysTicks for the current clock that equal 1
-  * second. This value must match the SysTick driver
-  * implementation.                                          
-*/
-#define TIMEBASE_DRV_NUM_TICKS_PER_SECOND (1000U)
 
 // The maximum allowable SysTick (simply max unsigned 32-bit value)
 #define TIMEBASE_DRV_MAX_TICK_VALUE (UINT32_MAX)
+
+// Keil default for time.h is centiseconds, change to milliseconds
+#define __CLK_TCK (1000U)
+
+// The number of SysTicks for the current clock that equal 1
+// second. This value must match the SysTick driver implementation.                                          
+#define TIMEBASE_DRV_NUM_TICKS_PER_SECOND (__CLK_TCK)
 
 // The number of SysTicks for the current clock that equal 1 millisecond
 // Note that the maximum value is 49 to keep the Software Timer objects from overflowing
@@ -36,12 +37,7 @@ extern "C"
 
 
 /*******************************************************************************
-// Public Types
-*******************************************************************************/
-
-
-/*******************************************************************************
-// Public Variables
+// Public Type Declarations
 *******************************************************************************/
 
 
