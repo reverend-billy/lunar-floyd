@@ -58,7 +58,7 @@ Access to this Git repo is restricted to select Lunar Energy employees, so you m
 
 ## Directory structure
 
-The C source and header files are in the `Src` directory. Code for each XMC dev board is located in its respective subdirectory under `Boards`. More generic code for each XMC micro series is located in its respective subdirectory under `Devices`.
+The C source and header files are in the `Src` directory. Code for each XMC dev board is located in its respective subdirectory under `Src/Boards`. Code shared across all XMC micros is located in the top-level `Src` directory and the `Infineon/XMC` directory under `Src/Devices`. Think of this common code as a HAL that wraps the underlying board-specific implementations.
 
 ```
 lunar-core
@@ -89,13 +89,6 @@ lunar-core
 │   │           UART_Drv_ConfigTable.h
 │   │
 │   └───Devices
-│       ├───CMSIS
-│       │   └───Include
-│       │           cachel1_armv7.h
-│       │           cmsis_armcc.h
-│       │           ...
-│       │           pmu_armv8.h
-│       │           tz_context.h
 │       │
 │       ├───Infineon
 │       │   └───XMC
@@ -108,46 +101,12 @@ lunar-core
 │       │       │   UART_Drv.c
 │       │       │
 │       │       ├───XMC1400_series
-│       │       │   ├───Include
-│       │       │   │       system_XMC1400.h
-│       │       │   │       XMC1000_RomFunctionTable.h
-│       │       │   │       XMC1400.h
-│       │       │   │
-│       │       │   └───Source
-│       │       │       │   system_XMC1400.c
-│       │       │       │
-│       │       │       └───ARM
 │       │       │
 │       │       ├───XMC4400_series
-│       │       │   ├───Include
-│       │       │   │       system_XMC4400.h
-│       │       │   │       XMC4400.h
-│       │       │   │
-│       │       │   └───Source
-│       │       │       │   system_XMC4400.c
-│       │       │       │
-│       │       │       └───ARM
 │       │       │
 │       │       ├───XMC4800_series
-│       │       │   ├───Include
-│       │       │   │       system_XMC4800.h
-│       │       │   │       XMC4800.h
-│       │       │   │
-│       │       │   └───Source
-│       │       │       │   system_XMC4800.c
-│       │       │       │
-│       │       │       └───ARM
 │       │       │
 │       │       └───XMClib
-│       │           ├───inc
-│       │           │       xmc1_ccu4_map.h
-│       │           │       ...
-│       │           │       xmc_wdt.h
-│       │           │
-│       │           └───src
-│       │                   xmc1_eru.c
-│       │                   ...
-│       │                   xmc_wdt.c
 │       │
 │       └───Newlib
 │               syscalls.c
