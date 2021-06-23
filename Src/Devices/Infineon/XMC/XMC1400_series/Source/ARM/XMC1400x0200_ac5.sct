@@ -66,8 +66,7 @@
 */
 
 ; Reserved 8K for bootloader 0x10001000->0x10003000 (size 0x30000)
-; #define __BOOTLOADER_SIZE 0x00002000
-#define __BOOTLOADER_SIZE 0
+#define __BOOTLOADER_SIZE 0x00002000
 #define __ROM_BASE     (0x10001000 + __BOOTLOADER_SIZE)
 #define __ROM_SIZE     (0x00032000 - __BOOTLOADER_SIZE)
 

@@ -85,8 +85,8 @@ void Lunar_Serial_ResetStats(const UART_Drv_Channel_t channel);
   *           wrap around the circular TX buffer.
   * Parameters: 
   *    channel - The configured UART pin that is to be written
-  *    data - A pointer to the data that is to be sent
-  *    length - The number of bytes in the data buffer that is to be sent
+  *    data - A pointer to the data that is to be sent.
+  *    dataLength - The number of bytes in the data buffer that is to be sent.
   *    encoding - Specifies the encoding to be used when placing data in the
   *    transmit buffer.  If ASCII, each byte will be converted (Ex. ASCII
   *    encoded Hex, 0x0F = "0F")
@@ -94,7 +94,7 @@ void Lunar_Serial_ResetStats(const UART_Drv_Channel_t channel);
   *    * 6/6/2021: Function created (EJH)
   *                                                              
 */
-void Lunar_Serial_Send(const UART_Drv_Channel_t channel, uint8_t *const data, const uint8_t length, const Lunar_Serial_Encoding_t encoding) PLATFORM_NON_NULL;
+void Lunar_Serial_Send(const UART_Drv_Channel_t channel, uint8_t *const data, const uint8_t dataLength, const Lunar_Serial_Encoding_t encoding) PLATFORM_NON_NULL;
 
 /** Description:
   *    This is the command handler used for querying serial TX/RX statistics for

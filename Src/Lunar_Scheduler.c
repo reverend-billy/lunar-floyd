@@ -56,12 +56,12 @@ static Lunar_Scheduler_Status_t status;
 /** Description:
   *    Function to start the timer for a scheduled function.
   * Parameters:
-  *    functionIndex - Index into the Lunar_Scheduler_configTable
+  *    timerIndex - Index into the Lunar_Scheduler_configTable
   * History: 
   *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-static void StartTimer(uint8_t functionIndex);
+static void StartTimer(const uint8_t timerIndex);
 
 
 /*******************************************************************************
@@ -69,7 +69,7 @@ static void StartTimer(uint8_t functionIndex);
 *******************************************************************************/
 
 // Function to start the timer for the function at the given index
-static void StartTimer(uint8_t timerIndex)
+static void StartTimer(const uint8_t timerIndex)
 {
    // Verify the timer index is valid
    if (timerIndex < (uint8_t)NUM_SCHEDULED_FUNCTIONS)

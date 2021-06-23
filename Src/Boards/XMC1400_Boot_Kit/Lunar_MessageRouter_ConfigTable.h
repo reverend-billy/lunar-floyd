@@ -22,6 +22,7 @@ extern "C"
 // Other Includes
 #include "Control_MessageTable.h"
 #include "LEDMgr_MessageTable.h"
+#include "ReportMgr_MessageTable.h"
 #include "RTC_Drv_MessageTable.h"
 
 
@@ -43,6 +44,8 @@ static const Lunar_MessageRouter_ConfigItem_t messageRouterConfigTable[] =
    // { 0x07, PWM_messageTable, sizeof(PWM_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t) },
    // { 0x08, TemperatureMonitor_messageTable, sizeof(TemperatureMonitor_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t) },
    { 0x09, RTC_Drv_messageTable, sizeof(RTC_Drv_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t)},
+   { 0xB0, ReportMgr_messageTable, sizeof(ReportMgr_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t) },
+   { 0xB1, Control_messageTableCAN, sizeof(Control_messageTableCAN) / sizeof(Lunar_MessageRouter_CommandTableItem_t)},
 };
 
 #ifdef __cplusplus

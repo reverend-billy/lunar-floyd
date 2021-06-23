@@ -277,7 +277,7 @@ void Lunar_ErrorMgr_MessageRouter_GetErrorState(Lunar_MessageRouter_Message_t *c
       // Error index whose state was retrieved.
       Lunar_ErrorMgr_Error_t errorIndex;
       // State of the specified error.
-      bool errorState;
+      bool newErrorState;
    } Response_t;
 
    //-----------------------------------------------
@@ -302,7 +302,7 @@ void Lunar_ErrorMgr_MessageRouter_GetErrorState(Lunar_MessageRouter_Message_t *c
       response->errorIndex = command->errorIndex;
 
       // Fetch the error state for the given error
-      response->errorState = Lunar_ErrorMgr_GetErrorState(response->errorIndex);
+      response->newErrorState = Lunar_ErrorMgr_GetErrorState(response->errorIndex);
 
 
       // Set the response length

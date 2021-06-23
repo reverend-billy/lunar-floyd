@@ -149,7 +149,7 @@ static time_t GetEpoch(void)
 
 
 // Get Epoch for 1/1/2000
-static uint32_t GetY2KEpoch(void)
+static time_t GetY2KEpoch(void)
 {
    return(GetEpoch() + EPOCH_TIME_OFFSET_S);
 }
@@ -270,7 +270,7 @@ void RTC_Drv_SetEnableState(const bool newEnableState)
 void RTC_Drv_GetCurrentTime(RTC_Drv_DateTime_t *const dateTime)
 {
    // Get the RTC Time
-   time_t secondsTime;
+   time_t secondsTime = 0;
 
    // Get time from <time.h> function
    time(&secondsTime);
@@ -302,30 +302,30 @@ void RTC_Drv_GetCurrentTime(RTC_Drv_DateTime_t *const dateTime)
 void RTC_Drv_SetCurrentTime(const RTC_Drv_DateTime_t *const dateTime)
 {
    // Set the RTC Time
-   XMC_RTC_TIME_t time;
+   XMC_RTC_TIME_t timeValue;
 
    // Populate the response data
-   time.seconds = dateTime->time.seconds;
-   time.minutes = dateTime->time.minutes;
-   time.hours = dateTime->time.hours;
+   timeValue.seconds = dateTime->time.seconds;
+   timeValue.minutes = dateTime->time.minutes;
+   timeValue.hours = dateTime->time.hours;
    // Adjust time if 12 hour/PM
    if (dateTime->time.timeFormat == RTC_DRV_TIME_FORMAT_PM)
    {
       // Add 12 hours when time is sent as 12HR and PM is selected
-      time.hours += 12U;
+      timeValue.hours += 12U;
    }
 
    // Days are sent as 1-based (e.g. 1st of month = 1), but stored as 0-based
-   time.days = dateTime->date.day - 1;
+   timeValue.days = dateTime->date.day - 1;
    // Set year as a whole number, not offset
-   time.year = dateTime->date.year;
+   timeValue.year = dateTime->date.year;
    // Month is sent as 1-based (e.g. Jan = 1), but stored as 0-based
-   time.month = dateTime->date.month - 1;
+   timeValue.month = dateTime->date.month - 1;
    // Day of the week isn't need for XMC
-   time.daysofweek = dateTime->date.dayOfWeek;
+   timeValue.daysofweek = dateTime->date.dayOfWeek;
 
    // Call XMC Lib to set the time and date
-   XMC_RTC_SetTime(&time);
+   XMC_RTC_SetTime(&timeValue);
 }
 
 

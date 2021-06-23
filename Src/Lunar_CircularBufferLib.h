@@ -62,7 +62,7 @@ typedef struct
   *    * 6/6/2021: Function created (EJH)
   *                                                              
 */
-void Lunar_CircularBufferLib_Init(Lunar_CircularBufferLib_t *const circularBuffer, uint8_t *dataBuffer, const uint16_t bufferSize) PLATFORM_NON_NULL;
+void Lunar_CircularBufferLib_Init(Lunar_CircularBufferLib_t *const circularBuffer, uint8_t *const dataBuffer, const uint16_t bufferSize) PLATFORM_NON_NULL;
 
 /** Description:
   *    Adds the specified data to the specified circular buffer. All

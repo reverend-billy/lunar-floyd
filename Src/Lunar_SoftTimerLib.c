@@ -168,7 +168,7 @@ bool Lunar_SoftTimerLib_IsTimerExpired(Lunar_SoftTimerLib_Timer_t *const timer)
 
 
 // Get the remaining time in milliseconds for a countdown timer
-uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *const timer)
+uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(const Lunar_SoftTimerLib_Timer_t *const timer)
 {
    uint32_t remainingMilliseconds = 0U;
 

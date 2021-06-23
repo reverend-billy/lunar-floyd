@@ -26,7 +26,7 @@ extern "C"
 // unncessary conversion
 XMC_RTC_CONFIG_t rtcConfigTable = {
     // The default value for the prescalar with the 32.768kHz crystal (or the internal clock) is 0x7FFF for a time interval of 1 sec
-	.prescaler = 0x7fffU,
+	.prescaler = 0x7FFFU,
 	.time = {
          // Initialize to the Y2K Epoch (1/1/200)
 			.seconds = 0U,

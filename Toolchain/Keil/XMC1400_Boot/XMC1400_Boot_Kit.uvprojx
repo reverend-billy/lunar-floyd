@@ -499,6 +499,11 @@
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Source\ARM\startup_XMC1400.s</FilePath>
             </File>
             <File>
+              <FileName>CAN_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\CAN_Drv.c</FilePath>
+            </File>
+            <File>
               <FileName>GPIO_Drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\GPIO_Drv.c</FilePath>
@@ -537,6 +542,11 @@
               <FileName>Control.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Boards\XMC1400_Boot_Kit\Control.c</FilePath>
+            </File>
+            <File>
+              <FileName>ReportMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC1400_Boot_Kit\ReportMgr.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1100,6 +1110,11 @@
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\XMC1400_series\Source\ARM\startup_XMC1400.s</FilePath>
             </File>
             <File>
+              <FileName>CAN_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\CAN_Drv.c</FilePath>
+            </File>
+            <File>
               <FileName>GPIO_Drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\GPIO_Drv.c</FilePath>
@@ -1138,6 +1153,11 @@
               <FileName>Control.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Boards\XMC1400_Boot_Kit\Control.c</FilePath>
+            </File>
+            <File>
+              <FileName>ReportMgr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Boards\XMC1400_Boot_Kit\ReportMgr.c</FilePath>
             </File>
           </Files>
         </Group>

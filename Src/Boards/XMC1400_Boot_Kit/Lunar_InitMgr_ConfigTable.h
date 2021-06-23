@@ -15,8 +15,10 @@ extern "C"
 // Module Includes
 #include "Lunar_InitMgr.h"
 // Platform Includes
+#include "CAN_Drv.h"
 #include "GPIO_Drv.h"
 #include "Reset_Drv.h"
+#include "RTC_Drv.h"
 #include "SysTick_Drv.h"
 #include "Lunar_ErrorMgr.h"
 #include "Lunar_EventMgr.h"
@@ -26,7 +28,7 @@ extern "C"
 // Other Includes
 #include "Control.h"
 #include "LEDMgr.h"
-#include "RTC_Drv.h"
+#include "ReportMgr.h"
 
 
 /*******************************************************************************
@@ -56,8 +58,10 @@ static const Lunar_InitMgr_ConfigItem_t initMgrConfigTable[] =
    { Lunar_Main_Init },
    { Lunar_Scheduler_Init },
    { LEDMgr_Init },
+   { CAN_Drv_Init },
    { Lunar_Serial_Init },
    { Control_Init },
+   { ReportMgr_Init },
 };
 
 #ifdef __cplusplus

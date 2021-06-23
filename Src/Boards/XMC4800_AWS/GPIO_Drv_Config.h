@@ -20,8 +20,8 @@ typedef enum
 {
    // This pin is used for device status and flashing error codes
    GPIO_DRV_CHANNEL_LED_STATUS,
-   // A second LED used for development
-   GPIO_DRV_CHANNEL_LED_ALT,
+   // LED enabled to denote fault status
+   GPIO_DRV_CHANNEL_LED_FAULT,
    // This defines the total number of enumerated GPIO values
    GPIO_DRV_CHANNEL_Count
 } GPIO_Drv_Channel_t;

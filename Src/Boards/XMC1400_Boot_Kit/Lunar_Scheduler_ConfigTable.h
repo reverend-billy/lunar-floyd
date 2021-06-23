@@ -16,7 +16,9 @@ extern "C"
 // Platform Includes
 #include "Lunar_Serial.h"
 // Other Includes
+#include "Control.h"
 #include "LEDMgr.h"
+#include "CAN_Drv.h"
 
 
 /*******************************************************************************
@@ -33,7 +35,9 @@ static const Lunar_Scheduler_ConfigItem_t schedulerConfigTable[] =
    // { s, ms, Pointer To Scheduled Function }
    // { 0, 5, Watchdog_Update},
    { 0,   10, Lunar_Serial_Update },
-   { 0,   50, LEDMgr_Update }
+   { 0,   50, Control_Update },
+   { 0,   50, LEDMgr_Update },
+   { 5,    0, CAN_Drv_Update },
 };
 
 #ifdef __cplusplus

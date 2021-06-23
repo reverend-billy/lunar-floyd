@@ -181,7 +181,7 @@ bool GPIO_Drv_Read(const GPIO_Drv_Channel_t channel)
 }
 
 // Writes the desired value to the given pin
-void GPIO_Drv_Write(const GPIO_Drv_Channel_t channel, bool enableState)
+void GPIO_Drv_Write(const GPIO_Drv_Channel_t channel, const bool enableState)
 {
    // Verify the given channel is valid
    if (channel < GPIO_DRV_CHANNEL_Count)

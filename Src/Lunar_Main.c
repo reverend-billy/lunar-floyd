@@ -150,7 +150,7 @@ void Lunar_Main_MessageRouter_GetApplicationVersion(Lunar_MessageRouter_Message_
       // Execute Command
       //-----------------------------------------------
       // Set Major.Minor to 0.0 for Debug Targets
-      if (mainConfigTable.releaseTarget)
+      if (mainConfigTable.releaseTarget != 0)
       {
          // Release build, use version
          response->major = PLATFORM_MIN(mainConfigTable.releaseTarget, mainConfigTable.version.major);
@@ -324,7 +324,7 @@ void Lunar_Main_MessageRouter_GetUptimeMillseconds(Lunar_MessageRouter_Message_t
       // Execute Command
       //-----------------------------------------------
 		
-      //xxx response->uptimeMilliseconds = Lunar_SoftTimerLib_GetElapsedTimeMilliseconds(&status.uptimeTimer);
+      // Just use the platform clock function as the uptime
 		response->uptimeMilliseconds = clock();
 
       // Set the response length

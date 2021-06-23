@@ -43,6 +43,9 @@ typedef enum
    // This error means the RAM has been detected as invalid by the software
    LUNAR_ERRORMGR_ERROR_RAM_CHECK_FAILED,
 
+   // Error triggered when battery block reports a fault
+   LUNAR_ERRORMGR_ERROR_BATTERY_FAULT,
+	
    // This is the number of errors defined by the enumerated type
    LUNAR_ERRORMGR_ERROR_Count,
 

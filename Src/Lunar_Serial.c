@@ -69,6 +69,7 @@
 
 // This defines the maximum length of command data in bytes.
 #define COMMAND_DATA_MAX_SIZE (48)
+
 /** This defines the maximum length of command data in
   * ASCII-coded hex.                                  
 */
@@ -119,6 +120,7 @@
 
 // This defines the maximum length of response data in bytes
 #define RESPONSE_DATA_MAX_SIZE (48)
+
 /** This defines the maximum length of response data in
   * ASCII-coded hex                                    
 */
@@ -140,9 +142,6 @@
 
 // This is the stop byte used for all outgoing responses.
 #define RESPONSE_STOP_BYTE ('\r')
-
-// The number of ports used -- currently all UART ports for this implementation
-#define NUM_PORTS (UART_DRV_CHANNEL_Count)
 
 
 /*******************************************************************************
@@ -172,7 +171,7 @@ typedef struct
    // Incremented for when Data is sent to the Serial Protocol module
    uint32_t numBytesSent;
    // Number of complete message received
-   // Incremented after a complete command is found during the 
+   // Incremented after a complete command is found during the
    // scheduled update loop
    uint32_t numMessagesReceived;
    /** The number of complete messages sent Incremented at each call
@@ -201,7 +200,7 @@ typedef struct
    // dequeue bytes from the UART driver
    // The data in this buffer is ASCII data that must be converted to binary
    // before sending on to the command processor.
-   ASCIICommandItem_t sASCIICommand;
+   ASCIICommandItem_t asciiCommand;
 
    /** The address for this device on this port For simplicity in
      * the driver, this initializes to BROADCAST_ADDRESS if
@@ -277,7 +276,7 @@ static void SendResponseAsciiHex(const UART_Drv_Channel_t channel, Lunar_Message
   *    * 6/6/2021: Function created (EJH)
   *                                                                 
 */
-static uint16_t ConvertAsciiHexStringToNumeric(uint8_t *const hexCharacters, const uint8_t numHexCharacters);
+static uint16_t ConvertAsciiHexStringToNumeric(const uint8_t *const hexCharacters, const uint8_t numHexCharacters);
 
 /** Description:
   *    This function takes a character '0' - 'F' and converts it to its hex equivalent 
@@ -418,7 +417,7 @@ static void SendResponseAsciiHex(const UART_Drv_Channel_t channel, Lunar_Message
 
 
 // Convert a series of ASCII-coded hex values to a single 16-bit numeric value
-static uint16_t ConvertAsciiHexStringToNumeric(uint8_t *const hexCharacters, const uint8_t numHexCharacters)
+static uint16_t ConvertAsciiHexStringToNumeric(const uint8_t *const hexCharacters, const uint8_t numHexCharacters)
 {
    // Default to 0 result
    uint16_t resultValue = 0U;
@@ -555,14 +554,13 @@ static void ConvertNumericToAsciiHexString(uint8_t *const destinationBuffer, con
 // Private Function Implementations
 *******************************************************************************/
 
-
 // Initialize all configured serial ports
 void Lunar_Serial_Init(void)
 {
    // Init the UART driver
    UART_Drv_Init();
 
-   for (uint8_t portIndex = 0; portIndex < NUM_PORTS; portIndex++)
+   for (uint8_t portIndex = 0; portIndex < UART_DRV_CHANNEL_Count; portIndex++)
    {
       // Init the port information and buffers
       memset(&status.portData[portIndex], 0, sizeof(PortData_t));
@@ -572,12 +570,11 @@ void Lunar_Serial_Init(void)
    }
 }
 
-
 // Scheduled update loop for processing messages
 void Lunar_Serial_Update(void)
 {
    // Loop through each port and check for new commands
-   for (uint8_t channel = 0U; channel < NUM_PORTS; channel++)
+   for (uint8_t channel = 0U; channel < UART_DRV_CHANNEL_Count; channel++)
    {
 #ifdef DEBUG_SEND_CONSTANT_DATA
       // Constantly send data during every update loop
@@ -589,7 +586,7 @@ void Lunar_Serial_Update(void)
       // Process RX Data
       //-----------------------------------------------
       // Store the command object for easy access
-      ASCIICommandItem_t *asciiCommand = &(status.portData[channel].sASCIICommand);
+      ASCIICommandItem_t *asciiCommand = &(status.portData[channel].asciiCommand);
 
       // Look for a valid command in the circular RX buffer
       if (FindNextCommand((UART_Drv_Channel_t)channel, asciiCommand))
@@ -629,7 +626,7 @@ void Lunar_Serial_Update(void)
             tmpIndex += tmpCharacterCount;
 #else
 
-            // Addressing is not used, just set address to the boardcast address (0xFF)
+            // Addressing is not used, just set address to the broadcast address (0xFF)
             uint8_t destinationAddress = (uint8_t)BROADCAST_ADDRESS;
 #endif
 
@@ -651,7 +648,7 @@ void Lunar_Serial_Update(void)
                message->header.messageID = (uint8_t)ConvertAsciiHexStringToNumeric(&(asciiCommand->data[tmpIndex]), tmpCharacterCount);
 
                //-----------------------------------------------
-               // Initialize Caommand Buffer
+               // Initialize Command Buffer
                //-----------------------------------------------
 
                // Move to the next byte for DATA LENGTH
@@ -830,7 +827,7 @@ void Lunar_Serial_MessageRouter_GetSerialStatistics(Lunar_MessageRouter_Message_
       //-----------------------------------------------
 
       // Verify the index is valid
-      if (command->channelIndex < NUM_PORTS)
+      if (command->channelIndex < UART_DRV_CHANNEL_Count)
       {
          // Port is valid, store the statistics object for easy access
          TxRxStatistics_t *tmpStatistics = &(status.portData[command->channelIndex].statistics);
