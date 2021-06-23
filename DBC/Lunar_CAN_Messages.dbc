@@ -1,4 +1,4 @@
-VERSION ""
+VERSION "0.3.0"
 
 
 NS_ : 
@@ -33,38 +33,39 @@ NS_ :
 
 BS_:
 
-BU_: Inverter
+BU_: Battery Inverter
+VAL_TABLE_ BB_State_Enum 99 "Fault" 6 "Suspending" 5 "Soc_Protection" 4 "Standby" 3 "Connected" 2 "Initializing" 1 "Disconnected" 0 "Unknown" ;
 
 
-BO_ 2147551745 BB_BatteryStatusRSP: 8 Vector__XXX
+BO_ 2147594241 BB_BatteryStatusRSP: 8 Vector__XXX
  SG_ BatteryBlockState : 0|16@1+ (1,0) [0|255] "" Vector__XXX
  SG_ BatteryVoltageV : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ BatteryCurrentA : 32|16@1- (0.005,0) [-163.84|163.835] "" Vector__XXX
  SG_ BatterySOC : 48|16@1+ (0.1,0) [0|102.3] "" Vector__XXX
 
-BO_ 2147551746 BB_DCDCStatusRSP: 4 Vector__XXX
+BO_ 2147594242 BB_DCDCStatusRSP: 4 Vector__XXX
  SG_ DCBusVoltageV : 0|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ DCBusCurrentA : 16|16@1- (0.005,0) [-163.84|163.835] "" Vector__XXX
 
-BO_ 2147551747 BB_CellVoltage1to4RSP: 8 Vector__XXX
+BO_ 2147594243 BB_CellVoltage1to4RSP: 8 Vector__XXX
  SG_ Cell1V : 0|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell2V : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell3V : 32|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell4V : 48|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
 
-BO_ 2147551748 BB_CellVoltage5to8RSP: 8 Vector__XXX
+BO_ 2147594244 BB_CellVoltage5to8RSP: 8 Vector__XXX
  SG_ Cell5V : 0|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell6V : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell7V : 32|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell8V : 48|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
 
-BO_ 2147551749 BB_CellVoltage9to12RSP: 8 Vector__XXX
+BO_ 2147594245 BB_CellVoltage9to12RSP: 8 Vector__XXX
  SG_ Cell9V : 0|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell10V : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell11V : 32|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
  SG_ Cell12V : 48|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
 
-BO_ 2147551750 BB_CellTempRSP: 6 Vector__XXX
+BO_ 2147594246 BB_CellTempRSP: 6 Vector__XXX
  SG_ Submodule1C : 0|8@1+ (0.5,-40) [-40|87.5] "" Vector__XXX
  SG_ Submodule2C : 8|8@1+ (0.5,-40) [-40|87.5] "" Vector__XXX
  SG_ Submodule3C : 16|8@1+ (0.5,-40) [-40|87.5] "" Vector__XXX
@@ -72,27 +73,27 @@ BO_ 2147551750 BB_CellTempRSP: 6 Vector__XXX
  SG_ Submodule5C : 32|8@1+ (0.5,-40) [-40|87.5] "" Vector__XXX
  SG_ Submodule6C : 40|8@1+ (0.5,-40) [-40|87.5] "" Vector__XXX
 
-BO_ 2147551751 BB_DCDCTemperaturesRSP: 4 Vector__XXX
+BO_ 2147594247 BB_DCDCTemperaturesRSP: 4 Vector__XXX
  SG_ BBHeatsinkC : 0|16@1+ (1,-60) [-60|195] "" Vector__XXX
  SG_ FanDutyCycle : 16|16@1+ (0.1,0) [0|102.3] "" Vector__XXX
 
-BO_ 2147554305 INV_L2NStatusRSP: 8 Vector__XXX
+BO_ 2147590145 INV_L2NStatusRSP: 8 Vector__XXX
  SG_ L1NVoltageVrms : 0|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ L2NVoltageVrms : 16|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ L1NCurrentArms : 32|16@1+ (0.005,0) [0|327.675] "" Vector__XXX
  SG_ L2NCurrentArms : 48|16@1+ (0.005,0) [0|327.675] "" Vector__XXX
 
-BO_ 2147554306 INV_L2LStatusRSP: 4 Vector__XXX
+BO_ 2147590146 INV_L2LStatusRSP: 4 Vector__XXX
  SG_ L1L2VoltageVrms : 0|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ L1L2CurrentArms : 16|16@1+ (0.005,0) [0|327.675] "" Vector__XXX
 
-BO_ 2147554307 INV_DCBusStatusRSP: 8 Vector__XXX
+BO_ 2147590147 INV_DCBusStatusRSP: 8 Vector__XXX
  SG_ PosBusVoltage : 0|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ NegBusVoltage : 16|16@1+ (0.01,0) [0|655.35] "" Vector__XXX
  SG_ PosBusCurrent : 32|16@1+ (0.005,0) [0|327.675] "" Vector__XXX
  SG_ NegBusCurrent : 48|16@1+ (0.005,0) [0|327.675] "" Vector__XXX
 
-BO_ 2147554308 INV_TemperaturesRSP: 8 Vector__XXX
+BO_ 2147590148 INV_TemperaturesRSP: 8 Vector__XXX
  SG_ InvHeatsinkC : 0|8@1+ (1,-60) [-60|195] "" Vector__XXX
  SG_ InvPowerStage1C : 8|8@1+ (1,-60) [-60|195] "" Vector__XXX
  SG_ InvPowerStage2C : 16|8@1+ (1,-60) [-60|195] "" Vector__XXX
@@ -100,16 +101,16 @@ BO_ 2147554308 INV_TemperaturesRSP: 8 Vector__XXX
  SG_ InvFanDutyCycle1 : 32|16@1+ (0.1,0) [0|102.3] "" Vector__XXX
  SG_ InvFanDutyCycle2 : 48|16@1+ (0.1,0) [0|102.3] "" Vector__XXX
 
-BO_ 2147554309 INV_StateRSP: 3 Vector__XXX
+BO_ 2147590149 INV_StateRSP: 3 Vector__XXX
  SG_ InvState : 0|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ InvACRelay : 8|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ INV_L1L2InPhase : 16|8@1+ (1,0) [0|255] "" Vector__XXX
 
-BO_ 2147486465 BB_CommandCMD: 2 Vector__XXX
+BO_ 2147528961 BB_CommandCMD: 2 Vector__XXX
  SG_ BB_StateReq : 0|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ BB_ResetReq : 8|8@1+ (1,0) [0|255] "" Vector__XXX
 
-BO_ 2147489025 INV_CommandCMD: 4 Vector__XXX
+BO_ 2147524865 INV_CommandCMD: 4 Vector__XXX
  SG_ INV_StateReq : 0|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ INV_ResetReq : 8|8@1+ (1,0) [0|255] "" Vector__XXX
  SG_ INV_RapidShutdown : 16|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -117,6 +118,7 @@ BO_ 2147489025 INV_CommandCMD: 4 Vector__XXX
 
 
 
+BA_DEF_ SG_  "BB_State" ENUM  "Unknown","Disconnected","Initializing","Connected","Standby","SoC_Protection","Suspending";
 BA_DEF_ SG_  "GenSigAltSetting" STRING ;
 BA_DEF_ SG_  "GenSigAssignSetting" STRING ;
 BA_DEF_ SG_  "GenSigAutoGenDsp" ENUM  "No","Yes";
@@ -155,6 +157,7 @@ BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","CyclicIfActive","SpontanWi
 BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
 BA_DEF_  "DBName" STRING ;
 BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BB_State" "Unknown";
 BA_DEF_DEF_  "GenSigAltSetting" "";
 BA_DEF_DEF_  "GenSigAssignSetting" "";
 BA_DEF_DEF_  "GenSigAutoGenDsp" "";
@@ -194,18 +197,18 @@ BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
 BA_DEF_DEF_  "DBName" "Inverter CAN Bus";
 BA_DEF_DEF_  "BusType" "CAN";
 BA_ "DBName" "Moixa";
-BA_ "VFrameFormat" BO_ 2147551745 1;
-BA_ "VFrameFormat" BO_ 2147551746 1;
-BA_ "VFrameFormat" BO_ 2147551747 1;
-BA_ "VFrameFormat" BO_ 2147551748 1;
-BA_ "VFrameFormat" BO_ 2147551749 1;
-BA_ "VFrameFormat" BO_ 2147551750 1;
-BA_ "VFrameFormat" BO_ 2147551751 1;
-BA_ "VFrameFormat" BO_ 2147554305 1;
-BA_ "VFrameFormat" BO_ 2147554306 1;
-BA_ "VFrameFormat" BO_ 2147554307 1;
-BA_ "VFrameFormat" BO_ 2147554308 1;
-BA_ "VFrameFormat" BO_ 2147554309 1;
-BA_ "VFrameFormat" BO_ 2147486465 1;
-BA_ "VFrameFormat" BO_ 2147489025 1;
+BA_ "VFrameFormat" BO_ 2147594241 1;
+BA_ "VFrameFormat" BO_ 2147594242 1;
+BA_ "VFrameFormat" BO_ 2147594243 1;
+BA_ "VFrameFormat" BO_ 2147594244 1;
+BA_ "VFrameFormat" BO_ 2147594245 1;
+BA_ "VFrameFormat" BO_ 2147594246 1;
+BA_ "VFrameFormat" BO_ 2147594247 1;
+BA_ "VFrameFormat" BO_ 2147590145 1;
+BA_ "VFrameFormat" BO_ 2147590146 1;
+BA_ "VFrameFormat" BO_ 2147590147 1;
+BA_ "VFrameFormat" BO_ 2147590148 1;
+BA_ "VFrameFormat" BO_ 2147590149 1;
+BA_ "VFrameFormat" BO_ 2147528961 1;
+BA_ "VFrameFormat" BO_ 2147524865 1;
 
