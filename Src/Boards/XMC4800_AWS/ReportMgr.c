@@ -10,7 +10,9 @@
 #include "ReportMgr.h"
 #include "ReportMgr_CAN.h"
 // Platform Includes
+#include "CAN_Drv.h"
 #include "Platform.h"
+#include "Lunar_ErrorMgr.h"
 #include "Lunar_SoftTimerLib.h"
 // Other Includes
 #include "Control.h"
@@ -22,6 +24,11 @@
 /*******************************************************************************
 // Private Constant Definitions
 *******************************************************************************/
+
+// This value represent the fault state returned by the BB_BatteryStatusRSP
+// This is currently used to test cacading faults over CAN but is expected to 
+// replaced as the control is implemented.
+#define BATTERY_FAULT_VALUE (99U)
 
 
 /*******************************************************************************
@@ -69,7 +76,9 @@ void ReportMgr_Init(void)
 // Periodic update function
 void ReportMgr_Update(void)
 {
-   // TODO
+   //static uint8_t data[] = {1,2,3}; //,4,5,6,7,8};
+   //CAN_Drv_TransmitPacket(&data[0], sizeof(data));
+		
 }
 
 
@@ -251,5 +260,35 @@ void ReportMgr_MessageRouter_INV_StateRSP(Lunar_MessageRouter_Message_t *const m
       Lunar_MessageRouter_SetResponseSize(message, sizeof(Response_t));
    }		
 }
+
+//BB_BatteryStatusRSP
+void ReportMgr_MessageRouter_BB_BatteryStatusRSP(Lunar_MessageRouter_Message_t *const message)
+{
+   // Command/Response Params defined in ReportMgr_CAN.h file
+   typedef BB_BatteryStatusRSP_t Command_t;
+
+   //-----------------------------------------------
+   // Message Processing
+   //-----------------------------------------------
+
+   // Verify the length of the command parameters and make sure we have room for the response
+   //	Note that the error response will be set, if necessary
+   if (Lunar_MessageRouter_VerifyParameterSizes(message, sizeof(Command_t), 0))
+   {
+      // Cast the response buffer as the response type
+      Command_t *command = (Command_t *)message->commandParams.data;
+
+      //-----------------------------------------------
+      // Execute Command
+      //-----------------------------------------------
+		
+		// Just set the error state if the battery is in fault mode
+		Lunar_ErrorMgr_SetErrorState(LUNAR_ERRORMGR_ERROR_BATTERY_FAULT, command->BatteryBlockState == BATTERY_FAULT_VALUE);
+		
+      // Set the response length
+      Lunar_MessageRouter_SetResponseSize(message, 0);
+   }		
+}
+
 
 

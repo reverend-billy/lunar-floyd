@@ -31,20 +31,13 @@ static const Lunar_MessageRouter_CommandTableItem_t ReportMgr_messageTable[] =
    // {Command ID, Message Handler Function Pointer}
    // Note that the Command IDs are currently aligned with the auto-generated ReportMgr_CAN.h file
    // Only the LSB of the CAN ID is used for the Command ID
-   { (uint8_t)INV_L2NStatusRSP_CANID, ReportMgr_MessageRouter_INV_L2NStatusRSP },
-   { (uint8_t)INV_L2LStatusRSP_CANID, ReportMgr_MessageRouter_INV_L2LStatusRSP },
-   { (uint8_t)INV_DCBusStatusRSP_CANID, ReportMgr_MessageRouter_INV_DCBusStatusRSP },
-   { (uint8_t)INV_TemperaturesRSP_CANID, ReportMgr_MessageRouter_INV_TemperaturesRSP },   
-   { (uint8_t)INV_StateRSP_CANID, ReportMgr_MessageRouter_INV_StateRSP },
-};
-
-// This table provides provides handlers for Battery Block messages
-static const Lunar_MessageRouter_CommandTableItem_t ReportMgr_messageTableBattery[] =
-{
-   // {Command ID, Message Handler Function Pointer}
-   // Note that the Command IDs are currently aligned with the auto-generated ReportMgr_CAN.h file
-   // Only the LSB of the CAN ID is used for the Command ID
    { (uint8_t)BB_BatteryStatusRSP_CANID, ReportMgr_MessageRouter_BB_BatteryStatusRSP },
+   { (uint8_t)BB_DCDCStatusRSP_CANID, ReportMgr_MessageRouter_BB_DCDCStatusRSP },
+   { (uint8_t)BB_CellVoltage1to4RSP_CANID, ReportMgr_MessageRouter_BB_CellVoltage1to4RSP },
+   { (uint8_t)BB_CellVoltage5to8RSP_CANID, ReportMgr_MessageRouter_BB_CellVoltage5to8RSP },
+   { (uint8_t)BB_CellVoltage9to12RSP_CANID, ReportMgr_MessageRouter_BB_CellVoltage9to12RSP },
+   { (uint8_t)BB_CellTempRSP_CANID, ReportMgr_MessageRouter_BB_CellTempRSP },
+   { (uint8_t)BB_DCDCTemperaturesRSP_CANID, ReportMgr_MessageRouter_BB_DCDCTemperaturesRSP },
 };
 
 #ifdef __cplusplus

@@ -258,7 +258,7 @@ void LEDMgr_Update(void)
       status.targetErrorCodeFlashes = CheckForFlashCode();
 
       // See if the control is enabled
-      if (Control_GetState() == CONTROL_STATE_CONNECTED)
+      if (Control_GetState() == CONTROL_ACTIVE_STATE)
       {
          // Control enabled -- fast blink
          blinkTimeMs = (uint32_t)LED_BLINK_TIME_RUNNING_MS;

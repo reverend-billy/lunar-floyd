@@ -52,7 +52,7 @@ static const GPIO_Drv_ConfigItem_t gpioConfigTable[GPIO_DRV_CHANNEL_Count] =
       .gpioConfig.gpioOutput =
       {
          .isActiveHigh = true,
-         .initialEnableState = true
+         .initialEnableState = false
       }
    }
 };

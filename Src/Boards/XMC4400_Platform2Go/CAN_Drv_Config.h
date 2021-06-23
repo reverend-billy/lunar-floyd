@@ -1,5 +1,5 @@
 /*******************************************************************************
-// UART Driver Configuration
+// CAN Driver Configuration
 *******************************************************************************/
 #pragma once
 
@@ -17,41 +17,26 @@ extern "C"
 // Platform Includes
 #include "DevicePin_Config.h"
 // Other Includes
+#include "ReportMgr_CAN.h"
 #include <stdint.h> // Interget types
+#include "xmc_can.h"
 #include "xmc_gpio.h"
 #include "xmc_scu.h"
-#include "xmc_uart.h"
-#include "xmc_usic.h"
 
 
 /*******************************************************************************
 // Public Constant Definitions
 *******************************************************************************/
 
-// The UART Channel Index for the IRQ9/10 handlers
-// Specifying here allows the handler IRQs to be linked with the channel index in one spot
+// Configure CAN message ID target->host.
+#define CAN_TX_MSG_ID          (BB_BatteryStatusRSP_CANID | 0x80000000)
+// Configure number of bytes in the target->host CAN message.
+#define CAN_TX_MAX_DATA        (BB_BatteryStatusRSP_DLC)
 
-// Primary UART is used for built-in communication on the development board
-#define UART0_CONFIG_TX_CHANNEL_INDEX  UART_DRV_CHANNEL_DEBUG
-// XMC_UART0_CH1 TX uses IRQ10
-#define UART0_CONFIG_TX_HANDLER        IRQ_Hdlr_10
-// XMC_UART0_CH1 RX uses IRQ9
-#define UART0_CONFIG_RX_HANDLER        IRQ_Hdlr_9
-
-// The UART Channel Index for the IRQ11/12 handlers
-// Specifying here allows the handler IRQs to be linked with the channel index in one spot
-
-// Secondary UART uses a different channel so that the baud rate can
-// be different.
-// Note that a TTL->232 adapter must be used for communication with host PC
-#define UART1_CONFIG_TX_CHANNEL_INDEX  UART_DRV_CHANNEL_ALT
-// XMC_UART1_CH0 TX uses IRQ12
-#define UART1_CONFIG_TX_HANDLER        IRQ_Hdlr_12
-// XMC_UART1_CH0 TX uses IRQ11
-#define UART1_CONFIG_RX_HANDLER        IRQ_Hdlr_11
-
-// Used to denote an unused input source in the confugration table
-#define INPUT_SOURCE_INVALID (UINT8_MAX)
+// Configure CAN message ID host->target.
+#define CAN_RX_MSG_ID          (BB_CommandCMD_CANID | 0x80000000)
+// Configure number of bytes in the host->target CAN message.
+#define CAN_RX_MAX_DATA        (BB_CommandCMD_DLC)
 
 
 /*******************************************************************************
@@ -61,38 +46,27 @@ extern "C"
 // Defines the enumeration used to specify the desired UART in driver functions.
 typedef enum
 {
-   // UART Primary Channel - Debug
-   UART_DRV_CHANNEL_DEBUG,
-   // UART Secondary channel - Used for development
-   // This allows for validating the driver with multiple port configurations 
-   // and protocols
-   UART_DRV_CHANNEL_ALT,
-   /** The total number of UART channels configured Note that this
+   // CAN Primary Channel
+   CAN_DRV_CHANNEL_PRIMARY,
+   /** The total number of CAN channels configured Note that this
      * must match the uartConfigTable.                            
    */
-   UART_DRV_CHANNEL_Count
-} UART_Drv_Channel_t;
+   CAN_DRV_CHANNEL_Count
+} CAN_Drv_Channel_t;
 
-// Defines the structure that defines Input MUX for XMCLib UART driver
-typedef struct
-{
-   /*XMCLib Mux input definition (Ex. XMC_USIC_CH_INPUT_DX0)
-   */
-   XMC_USIC_CH_INPUT_t input;
-   /*XMCLib Mux source definition (Ex. USIC0_C1_DX0_P1_3)
-   */
-   uint8_t source;
-} UART_Drv_ChannelInputSource_t;
 
 // Defines the structure used for each entry it the UART Driver Config table
 typedef struct
 {
-   /*XMCLib USIC register configuration definition
+   /*XMCLib CAN register configuration definition
    */
-   XMC_USIC_CH_t *channel;
+   CAN_NODE_TypeDef *channel;
+   /*Index that corresponds to the channel (Ex. Node0=0, Node1=1)
+   */
+   uint8_t channelIndex;
    /*XMCLib UART initialization structure Defines baud rate, etc.
    */
-   XMC_UART_CH_CONFIG_t channelConfig;
+   XMC_CAN_NODE_NOMINAL_BIT_TIME_CONFIG_t channelConfig;
    /*RX Port/Pin definition
    */
    DevicePin_Config_t rxPin;
@@ -109,20 +83,8 @@ typedef struct
      * GPIO                                                         
    */
    XMC_GPIO_CONFIG_t txConfig;
-   /*\Input MUX configuration for DX0
-   */
-   UART_Drv_ChannelInputSource_t inputSourceDX0;
-   /** \Input MUX configuration for DX1 Use to activate additional
-     * \Input MUXs to select input pin (if not used, set to:
-     * XMC_INPUT_INVALID)                                         
-   */
-   UART_Drv_ChannelInputSource_t inputSourceDX1;
-   // Input mux configuration for DX2
-   // Use to activate additional Input MUXs to select input pin (if not used, set to: XMC_INPUT_INVALID)
-   UART_Drv_ChannelInputSource_t inputSourceDX2;
-   // Input mux configuration for DX3
-   // Use to activate additional Input MUXs to select input pin (if not used, set to: XMC_INPUT_INVALID)
-   UART_Drv_ChannelInputSource_t inputSourceDX3;
+   // Defines the possible receive inputs. 
+   XMC_CAN_NODE_RECEIVE_INPUT_t input;
    /*CMSIS-compatible IRQ definition for RX
    */
    IRQn_Type rxIrqNum;
@@ -150,7 +112,7 @@ typedef struct
    // XMC interrupt source used for RX of this channel (Ex. XMC_SCU_IRQCTRL_USIC0_SR1_IRQ9)
    XMC_SCU_IRQCTRL_t rxInterruptControlSource;
 #endif
-} UART_Drv_ConfigItem_t;
+} CAN_Drv_ConfigItem_t;
 
 
 #ifdef __cplusplus

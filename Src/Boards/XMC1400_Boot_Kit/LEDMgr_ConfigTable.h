@@ -35,7 +35,7 @@ static const LEDMgr_FlashCodeItem_t ledMgrFlashCodeTable[] =
 {
    // Error, Number of Flashes
    // {NOTE_1_BLINK_NOT_USED, 1}
-   { LUNAR_ERRORMGR_ERROR_RAM_CHECK_FAILED, 2 },
+   { LUNAR_ERRORMGR_ERROR_BATTERY_FAULT, 2 },
    { LUNAR_ERRORMGR_ERROR_VOLTAGE_LOW, 3 }
 };
 

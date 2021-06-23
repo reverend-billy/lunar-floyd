@@ -66,9 +66,10 @@
 /*
 ;------------- <<< end of configuration section >>> ---------------------------
 */
-
-#define __ROM_BASE     0x08000000
-#define __ROM_SIZE     0x00080000
+; Reserved 48K for bootloader (size 0xC000)
+#define __BOOTLOADER_SIZE 0x0000C000
+#define __ROM_BASE     (0x08000000 + __BOOTLOADER_SIZE)
+#define __ROM_SIZE     (0x00080000 - __BOOTLOADER_SIZE)
 
 #define __PSRAM_BASE   0x1FFFC000
 #define __PSRAM_SIZE   0x00004000

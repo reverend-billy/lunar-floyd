@@ -46,6 +46,7 @@ static const Lunar_MessageRouter_ConfigItem_t messageRouterConfigTable[] =
    { 0x09, RTC_Drv_messageTable, sizeof(RTC_Drv_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t)},
    { 0xA0, ReportMgr_messageTable, sizeof(ReportMgr_messageTable) / sizeof(Lunar_MessageRouter_CommandTableItem_t) },
    { 0xA1, Control_messageTableCAN, sizeof(Control_messageTableCAN) / sizeof(Lunar_MessageRouter_CommandTableItem_t)},
+   { 0xB0, ReportMgr_messageTableBattery, sizeof(ReportMgr_messageTableBattery) / sizeof(Lunar_MessageRouter_CommandTableItem_t) },
 };
 
 #ifdef __cplusplus

@@ -5,6 +5,7 @@
 /*******************************************************************************
 // Includes
 *******************************************************************************/
+
 // Module Includes
 #include "UART_Drv.h" // Driver API
 #include "UART_Drv_Config.h" // Channel enumeration
@@ -106,13 +107,14 @@ static void HandleChannelRXInterrupt(const UART_Drv_Channel_t channel);
 *******************************************************************************/
 
 // Get data from outgoing buffer and place in TX register
-void HandleChannelTXInterrupt(UART_Drv_Channel_t channel)
+static void HandleChannelTXInterrupt(const UART_Drv_Channel_t channel)
 {
-   uint8_t tmpByte;
 
    // Verify the channel index
    if (channel < UART_DRV_CHANNEL_Count)
    {
+      uint8_t tmpByte = 0;
+
       // Get next byte data from circular buffer, if any
       if (Lunar_CircularBufferLib_Dequeue(&(status.portBuffers[channel].txCircularBuffer), &tmpByte))
       {
@@ -123,7 +125,7 @@ void HandleChannelTXInterrupt(UART_Drv_Channel_t channel)
 }
 
 // Add data to buffer and set up next RX interrupt
-void HandleChannelRXInterrupt(UART_Drv_Channel_t channel)
+static void HandleChannelRXInterrupt(const UART_Drv_Channel_t channel)
 {
    // Verify the channel index
    if (channel < UART_DRV_CHANNEL_Count)
@@ -248,7 +250,7 @@ void UART_Drv_Init(void)
 }
 
 // Write data to the given UART
-void UART_Drv_Write(UART_Drv_Channel_t channel, uint8_t *data, const uint8_t length)
+void UART_Drv_Write(const UART_Drv_Channel_t channel, uint8_t *const data, const uint8_t length)
 {
    // Store PWM as number to prevent debugger confusion
    uint8_t channelIndex = (uint8_t)channel;
@@ -257,13 +259,13 @@ void UART_Drv_Write(UART_Drv_Channel_t channel, uint8_t *data, const uint8_t len
    if (channelIndex < UART_DRV_CHANNEL_Count)
    {
       // Validate the given buffer
-      if (data)
+      if (data != 0)
       {
          // Store the channel configuration for easier access
          const UART_Drv_ConfigItem_t *uart = &uartConfigTable[channelIndex];
 
          // Loop through the given data and add to the circular buffer
-         for (uint8_t i = 0; i < length; i++)
+         for (uint8_t i = 0U; i < length; i++)
          {
             // Put given byte in TX buffer
             Lunar_CircularBufferLib_Enqueue(&(status.portBuffers[channelIndex].txCircularBuffer), *(data + i));
@@ -274,22 +276,20 @@ void UART_Drv_Write(UART_Drv_Channel_t channel, uint8_t *data, const uint8_t len
          {
             // Just trigger the TX Callback so all sending goes through the same mechanism
             // First enable the TX event
-
-            // xxx Debug
-            // XMC_UART0_CH1->TRBSCR = (uint32_t)USIC_CH_TRBSCR_FLUSHTB_Msk;
-
             XMC_USIC_CH_TXFIFO_EnableEvent(uart->channel, (uint32_t)XMC_USIC_CH_TXFIFO_EVENT_CONF_STANDARD);
             // Then trigger the transmit buffer interrupt
             XMC_USIC_CH_TriggerServiceRequest(uart->channel, (uint32_t)0x01U);
 
-            // xxx - Trigger the first write
-            uint8_t tmpByte;
-
+				// Variable where new byte is stored
+            uint8_t tmpByte = 0;
+				
+            // Trigger the first write
             if (Lunar_CircularBufferLib_Dequeue(&(status.portBuffers[channelIndex].txCircularBuffer), &tmpByte))
             {
+
                // Byte successfully dequeued from the TX buffer, send it
-               //XMC_UART_CH_Transmit(UART_configInfo.channel, tmpByte);
-               // xxx Check is full?
+               // XMC_UART_CH_Transmit(UART_configInfo.channel, tmpByte);
+               // TODO Check is full?
                XMC_USIC_CH_TXFIFO_PutData(uart->channel, tmpByte);
             }
          }
@@ -298,13 +298,13 @@ void UART_Drv_Write(UART_Drv_Channel_t channel, uint8_t *data, const uint8_t len
 }
 
 // Read a byte from the RX circular buffer
-bool UART_Drv_ReadByte(UART_Drv_Channel_t channel, uint8_t *buffer)
+bool UART_Drv_ReadByte(const UART_Drv_Channel_t channel, uint8_t *byteRead)
 {
    // Verify the given channel and buffer are valid
-   if ((channel < UART_DRV_CHANNEL_Count) && (buffer))
+   if ((channel < UART_DRV_CHANNEL_Count) && (byteRead != 0))
    {
       // Get the next byte from the buffer, if available
-      return(Lunar_CircularBufferLib_Dequeue(&(status.portBuffers[channel].rxCircularBuffer), buffer));
+      return(Lunar_CircularBufferLib_Dequeue(&(status.portBuffers[channel].rxCircularBuffer), byteRead));
    }
    else
    {

@@ -40,6 +40,9 @@ typedef enum
    // This error means the watchdog timer has occurred in the software
    LUNAR_ERRORMGR_ERROR_WATCHDOG_TIMEOUT,
 
+   // This is a generic error for testing faults
+   LUNAR_ERRORMGR_ERROR_BATTERY_FAULT,
+	
    // This error means the RAM has been detected as invalid by the software
    LUNAR_ERRORMGR_ERROR_RAM_CHECK_FAILED,
 

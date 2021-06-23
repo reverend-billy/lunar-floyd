@@ -28,7 +28,7 @@ static const Lunar_Main_ConfigItem_t mainConfigTable =
    // Version Info
    .version = {
       .major = 0,
-      .minor = 2,
+      .minor = 3,
       .build = 0,
    },
    .productId = 1404U,

@@ -9,6 +9,7 @@
 #include "Control.h"
 #include "Control_Config.h" // Control States
 // Platform Includes
+#include "GPIO_Drv.h"
 #include "Lunar_ErrorMgr.h"
 #include "Lunar_EventMgr.h"
 #include "Lunar_MessageRouter.h"
@@ -69,6 +70,10 @@ void Control_Init(void)
 void Control_Update(void)
 {
    // TODO
+	
+   // Currently we just set the LED status based on error state
+	// This is should be handled in a better way as the control is defined
+	GPIO_Drv_Write(GPIO_DRV_CHANNEL_LED_FAULT, Lunar_ErrorMgr_DoAnyErrorsExist());
 }
 
 // Enable and disable the control
@@ -79,13 +84,13 @@ void Control_SetState(const Control_State_t newState)
    {
       // Verify the new state
       // Faults are set through the error manager and are not set directly
-      if ((newState < CONTROL_STATE_Count) && (newState < CONTROL_STATE_FAULT))
+      if (newState < CONTROL_STATE_Count)
       {
          // Do not change state if there are any errors
          if (!Lunar_ErrorMgr_DoAnyErrorsExist())
          {
-            // If previous state was a connected, consider this new state disable event
-            if (status.deviceState == CONTROL_STATE_CONNECTED)
+            // If previous state was running, consider this new state disable event
+            if (status.deviceState == CONTROL_STATE_MPPT)
             {
                // This is a disable state, store it
                status.deviceState = newState;
@@ -161,7 +166,7 @@ void Control_MessageRouter_GetState(Lunar_MessageRouter_Message_t *const message
       //-----------------------------------------------
       // Execute Command
       //-----------------------------------------------
-      response->deviceState = Control_GetState();
+      response->deviceState = (uint8_t)Control_GetState();
 
       // Set the response length
       Lunar_MessageRouter_SetResponseSize(message, sizeof(Response_t));
@@ -178,7 +183,7 @@ void Control_MessageRouter_SetState(Lunar_MessageRouter_Message_t *const message
    typedef struct
    {
       // New enable state to be set
-      uint8_t newState;
+      uint8_t state;
    } Command_t;
 
 
@@ -192,7 +197,7 @@ void Control_MessageRouter_SetState(Lunar_MessageRouter_Message_t *const message
       //-----------------------------------------------
       // Execute Command
       //-----------------------------------------------
-      Control_SetState((Control_State_t)command->newState);
+      Control_SetState((Control_State_t)command->state);
 
       // Set the response length
       Lunar_MessageRouter_SetResponseSize(message, 0);
@@ -226,17 +231,17 @@ void Control_MessageRouter_INV_CommandCMD(Lunar_MessageRouter_Message_t *const m
       if (command->INV_RapidShutdown != 0)
       {		
 			// TODO - Rapid Shutdown
-		}
+	  }
       // Check Reset next. Reset if non-zero
       //      Bits=08.  [ 0     , 255    ]  Unit:''
-		else if (command->INV_ResetReq != 0)
+	  else if (command->INV_ResetReq != 0)
       {
          // Just call the platform reset function
          Reset_Drv_Execute();
       }
       else
-		{
-			// INV_L1L2InPhaseReq, not currently implemented
+	  {
+	     // INV_L1L2InPhaseReq, not currently implemented
          // No reset requested, check for state change
          // We can call this each time since Control will only act if the state changes
          //      Bits=08.  [ 0     , 255    ]  Unit:''

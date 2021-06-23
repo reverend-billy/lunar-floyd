@@ -56,14 +56,14 @@ void UART_Drv_Init(void);
   *    * 6/6/2021: Function created (EJH)
   *                                                                   
 */
-void UART_Drv_Write(const UART_Drv_Channel_t channel, uint8_t *data, const uint8_t length) PLATFORM_NON_NULL;
+void UART_Drv_Write(const UART_Drv_Channel_t channel, uint8_t *const data, const uint8_t length) PLATFORM_NON_NULL;
 
 /** Description:
   *    Function to retrieve a single byte from the circular buffer.  This is 
   *    primarily used for locating the next command to be processed.
   * Parameters: 
   *    channel:  The given channel from which to be read
-  *    byteRead: The destination buffer for the retreived byte.
+  *    byteRead: The destination buffer for the retrieved byte.
   * Returns:
   *    bool: The result of the read request
   * Return Value List:

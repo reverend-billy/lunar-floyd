@@ -50,7 +50,7 @@ static volatile unsigned int _Continue = 0U;
 // C entry point
 int main(void)
 {
-   // The Core Main module privide a single entry point for starting up the system
+   // The Core Main module provides a single entry point for starting up the system
    // It will initialize all configured modules and start the system scheduler
    // *** NOTE THIS WILL NOT RETURN ***
    Lunar_Main_Execute();

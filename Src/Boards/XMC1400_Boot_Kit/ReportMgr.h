@@ -58,7 +58,7 @@ void ReportMgr_Update(void);
 *******************************************************************************/
 
 /** Description:
-  *    This function retrieves the information for the INV_L2NStatusRSP message.
+  *    This function retrieves the information for the BB_BatteryStatus message.
   * Parameters:
   *    message :  A pointer to a common Message Router message
   *               object. The response is expected to be placed in
@@ -67,10 +67,11 @@ void ReportMgr_Update(void);
   *    * 6/8/2021: Function created (EJH)
   *                                                               
 */
-void ReportMgr_MessageRouter_INV_L2NStatusRSP(Lunar_MessageRouter_Message_t *const message);
+void ReportMgr_MessageRouter_BB_BatteryStatusRSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
+
 
 /** Description:
-  *    This function retrieves the information for the INV_L2LStatusRSP message.
+  *    This function retrieves the information for the BB_DCDCStatusRSP message.
   * Parameters:
   *    message :  A pointer to a common Message Router message
   *               object. The response is expected to be placed in
@@ -79,24 +80,11 @@ void ReportMgr_MessageRouter_INV_L2NStatusRSP(Lunar_MessageRouter_Message_t *con
   *    * 6/8/2021: Function created (EJH)
   *                                                               
 */
-void ReportMgr_MessageRouter_INV_L2LStatusRSP(Lunar_MessageRouter_Message_t *const message);
+void ReportMgr_MessageRouter_BB_DCDCStatusRSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
 
 
 /** Description:
-  *    This function retrieves the information for the INV_DCBusStatusRSP message.
-  * Parameters:
-  *    message :  A pointer to a common Message Router message
-  *               object. The response is expected to be placed in
-  *               this object.
-  * History:
-  *    * 6/8/2021: Function created (EJH)
-  *                                                               
-*/
-void ReportMgr_MessageRouter_INV_DCBusStatusRSP(Lunar_MessageRouter_Message_t *const message);
-
-
-/** Description:
-  *    This function retrieves the information for the INV_TemperaturesRSP
+  *    This function retrieves the information for the BB_CellVoltage1to4RSP
   *    message. 
   * Parameters: 
   *    message :  A pointer to a common Message Router message
@@ -106,11 +94,11 @@ void ReportMgr_MessageRouter_INV_DCBusStatusRSP(Lunar_MessageRouter_Message_t *c
   *    * 6/8/2021: Function created (EJH)
   *                                                               
 */
-void ReportMgr_MessageRouter_INV_TemperaturesRSP(Lunar_MessageRouter_Message_t *const message);
+void ReportMgr_MessageRouter_BB_CellVoltage1to4RSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
 
 
 /** Description:
-  *    This function retrieves the information for the INV_StateRSP
+  *    This function retrieves the information for the BB_CellVoltage5to8RSP
   *    message. 
   * Parameters: 
   *    message :  A pointer to a common Message Router message
@@ -120,11 +108,12 @@ void ReportMgr_MessageRouter_INV_TemperaturesRSP(Lunar_MessageRouter_Message_t *
   *    * 6/8/2021: Function created (EJH)
   *                                                               
 */
-void ReportMgr_MessageRouter_INV_StateRSP(Lunar_MessageRouter_Message_t *const message);
+void ReportMgr_MessageRouter_BB_CellVoltage5to8RSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
+
 
 /** Description:
-  *    This function handles the information sent by the battery block in the 
-  *    for the BB_BatteryStatusRSP message. 
+  *    This function retrieves the information for the BB_CellVoltage9to12RSP
+  *    message. 
   * Parameters: 
   *    message :  A pointer to a common Message Router message
   *               object. The response is expected to be placed in
@@ -133,7 +122,35 @@ void ReportMgr_MessageRouter_INV_StateRSP(Lunar_MessageRouter_Message_t *const m
   *    * 6/8/2021: Function created (EJH)
   *                                                               
 */
-void ReportMgr_MessageRouter_BB_BatteryStatusRSP(Lunar_MessageRouter_Message_t *const message);
+void ReportMgr_MessageRouter_BB_CellVoltage9to12RSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
+
+
+/** Description:
+  *    This function retrieves the information for the BB_CellTempRSP message.
+  * Parameters: 
+  *    message :  A pointer to a common Message Router message
+  *               object. The response is expected to be placed in
+  *               this object.
+  * History:
+  *    * 6/8/2021: Function created (EJH)
+  *                                                               
+*/
+void ReportMgr_MessageRouter_BB_CellTempRSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
+
+
+/** Description:
+  *    This function retrieves the information for the BB_DCDCTemperaturesRSP
+  *    message. 
+  * Parameters: 
+  *    message :  A pointer to a common Message Router message
+  *               object. The response is expected to be placed in
+  *               this object.
+  * History:
+  *    * 6/8/2021: Function created (EJH)
+  *                                                               
+*/
+void ReportMgr_MessageRouter_BB_DCDCTemperaturesRSP(Lunar_MessageRouter_Message_t *const message) PLATFORM_NON_NULL;
+
 
 #ifdef __cplusplus
 extern "C"

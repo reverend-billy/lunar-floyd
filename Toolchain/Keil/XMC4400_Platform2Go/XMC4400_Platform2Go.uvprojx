@@ -499,6 +499,11 @@
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\XMC4400_series\Source\ARM\startup_XMC4400.s</FilePath>
             </File>
             <File>
+              <FileName>CAN_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\CAN_Drv.c</FilePath>
+            </File>
+            <File>
               <FileName>GPIO_Drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\GPIO_Drv.c</FilePath>
@@ -1103,6 +1108,11 @@
               <FileName>startup_XMC4400.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\..\..\Src\Devices\Infineon\XMC\XMC4400_series\Source\ARM\startup_XMC4400.s</FilePath>
+            </File>
+            <File>
+              <FileName>CAN_Drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Devices\Infineon\XMC\CAN_Drv.c</FilePath>
             </File>
             <File>
               <FileName>GPIO_Drv.c</FileName>

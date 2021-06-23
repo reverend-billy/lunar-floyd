@@ -181,7 +181,7 @@ bool Lunar_SoftTimerLib_IsTimerExpired(Lunar_SoftTimerLib_Timer_t *const timer) 
   *    * 5/1/2021: Function created (EJH)
   *                                                              
 */
-uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
+uint32_t Lunar_SoftTimerLib_GetRemainingTimeMilliseconds(const Lunar_SoftTimerLib_Timer_t *const timer) PLATFORM_NON_NULL;
 
 /** Description:
   *    \Returns the elapsed time for a running count up
