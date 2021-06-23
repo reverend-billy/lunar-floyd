@@ -6,7 +6,7 @@ The smart inverter has an XMC4800 micro inside. Each battery block has an XMC440
 
 ## Prerequisites
 
-If you can view this README then you already have access to this private Git repo on [Lunar Energy's BitBucket](https://bitbucket.org/lunarenergy/).
+If you can view this README then you already have access to this private Git repo under [Lunar Energy's GitHub organization](https://github.com/lunar-energy).
 
 ### Hardware
 
@@ -29,10 +29,10 @@ Developing firmware for Lunar Energy requires the following software.
 - Windows 10
 - Git
 - [J-Link drivers](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack)
-- [MicroBoot](https://sourceforge.net/projects/openblt/)
+- [MicroBoot](https://drive.google.com/drive/folders/13ESPlwmsz8aK--Jb_gk6VmOd1Eg2U3FX)
 - [Keil MDK](https://www2.keil.com/mdk5/)
 
-Windows is needed to run the Keil MDK required for microcontroller software development. [Git for Windows](https://gitforwindows.org/) can be installed using [Chocolatey](https://community.chocolatey.org/packages/git) or by downloading and running the latest installer from gitforwindows.org. Windows 10 comes with an SSH client built-in so there is no need to install one for authenticating to BitBucket.
+Windows is needed to run the Keil MDK required for microcontroller software development. [Git for Windows](https://gitforwindows.org/) can be installed using [Chocolatey](https://community.chocolatey.org/packages/git) or by downloading and running the latest installer from gitforwindows.org. Windows 10 comes with an SSH client built-in so there is no need to install one for authenticating to GitHub.
 
 ## Getting started
 
@@ -40,24 +40,30 @@ Here are the steps to provision a Windows environment for firmware development.
 
 1. Download and install SEGGER's J-Link Software and Documentation Pack for Windows from https://www.segger.com/downloads/jlink/.
 
-2. Download and extract the MicroBoot utility from https://sourceforge.net/projects/openblt/. The MicroBoot Windows application and its associated DLLs are located in the `Host` directory inside OpenBLT's Zip archive.
+2. Download the MicroBoot utility and its associated DLLs from [here](https://drive.google.com/drive/folders/13ESPlwmsz8aK--Jb_gk6VmOd1Eg2U3FX) on Google Drive. Keep these files together inside the same folder after downloading.
 
 3. Download and install the Keil MDK from https://www2.keil.com/mdk5/. The MDK-Lite edition is sufficient if you don't have an MDK-Essential license yet since the 32 KB code size restriction is not an issue.
 
 4. Clone this repo from a PowerShell terminal:
 
 ```PowerShell
-PS C:\Users\Frank> git clone git@bitbucket.org:lunarenergy/lunar-core.git
+PS C:\Users\Frank> git clone git@github.com:lunar-energy/lunar-core.git
 Cloning into 'lunar-core'...
+The authenticity of host 'github.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 Enter passphrase for key '/c/Users/Frank/.ssh/id_rsa':
-remote: Counting objects: 734, done.
-remote: Compressing objects: 100% (485/485), done.
-Receiving objects: 100% (734/734)used 519 (delta 224) receiving objects:  92% (676/734)
-Receiving objects: 100% (734/734), 2.33 MiB | 4.73 MiB/s, done.
-Resolving deltas: 100% (328/328), done.
+remote: Enumerating objects: 851, done.
+remote: Counting objects: 100% (851/851), done.
+remote: Compressing objects: 100% (413/413), done.
+Receiving obl 851 (delta 409), reused 851 (delta 409), pack-reused 0 eceiving objects:  90% (766/851), 1.66 MiB | 3.31 MiB/s
+Receiving objects: 100% (851/851), 2.33 MiB | 3.06 MiB/s, done.
+Resolving deltas: 100% (409/409), done.
 ```
 
-Access to this Git repo is restricted to select Lunar Energy employees, so you must add your public SSH key (e.g. `~/.ssh/id_rsa.pub`) to your personal settings at https://bitbucket.org/lunarenergy/ before you can clone it.
+Access to this Git repo is restricted to select Lunar Energy employees, so you must add your public SSH key (e.g. `~/.ssh/id_rsa.pub`) to your account settings on GitHub before you can clone it.
 
 ## Directory structure
 
@@ -160,7 +166,7 @@ The process for building the `XMC4800_AWS` and `XMC1400_Boot` project files is e
 
 ## Flashing
 
-Before we can flash our application onto a dev board from uVision we must first flash our bootloader. OpenBLT-based bootloaders were required for development starting with the 0.3.0 release of our firmware.
+Before we can flash our application onto a dev board from uVision we must first flash [our bootloader](https://sourceforge.net/projects/openblt/). OpenBLT-based bootloaders were required for development starting with the 0.3.0 release of our firmware.
 
 ### Bootloader
 
