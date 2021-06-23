@@ -164,7 +164,11 @@ Before we can flash our application onto a dev board from uVision we must first 
 
 ### Bootloader
 
-Flashing a dev board with a bootloader `.hex` file only needs to be done once. uVision should not overwrite the bootloader when we flash our application. The bootloader contents starts at address 0x0 on the micro's flash so if that gets erased by accident then we must reprogram it.
+Flashing a dev board with a bootloader `.hex` file only needs to be done once. uVision should not overwrite the bootloader when we flash our application. The bootloader contents starts at the beginning of ROM (as definied by the micro) so if that gets erased by accident then we must reprogram it.
+To prevent overwriting the bootloader when using Keil, the J-Link Flash Download Settings may be set to erase sectors (rather than full chip) and the address space can be adjusted for each device:
+* XMC1400 Boot Kit - Flash Start: 0x10003000, Flash Size: 0x00030000 (8KB Reserved)
+* XMC4400 Platform2Go - Flash Start: 0x0C00C000, Flash Size: 0x00074000, Cached Flash Start: 0x0800C000, Cached Flash Size: 0x00074000 (48KB Reserved)
+* XMC4800 AWS - Flash Start: 0x0C00C000, Flash Size: 0x00100000, Cached Flash Start: 0x000F4000, Cached Flash Size: 0x000F4000  (48KB Reserved)
 
 The most recent `.hex` bootloader file for the XMC4400 Platform2Go can be found [here](https://drive.google.com/drive/u/0/folders/1dYsagXs5T2jxb9FgIlXM-XnMNAjgvivO) on Google Drive.
 
