@@ -29,6 +29,7 @@ Developing firmware for Lunar Energy requires the following software.
 - Windows 10
 - Git
 - [J-Link drivers](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack)
+- [MicroBoot](https://sourceforge.net/projects/openblt/)
 - [Keil MDK](https://www2.keil.com/mdk5/)
 
 Windows is needed to run the Keil MDK required for microcontroller software development. [Git for Windows](https://gitforwindows.org/) can be installed using [Chocolatey](https://community.chocolatey.org/packages/git) or by downloading and running the latest installer from gitforwindows.org. Windows 10 comes with an SSH client built-in so there is no need to install one for authenticating to BitBucket.
@@ -39,9 +40,11 @@ Here are the steps to provision a Windows environment for firmware development.
 
 1. Download and install SEGGER's J-Link Software and Documentation Pack for Windows from https://www.segger.com/downloads/jlink/.
 
-2. Download and install the Keil MDK from https://www2.keil.com/mdk5/. The MDK-Lite edition is sufficient if you don't have an MDK-Essential license yet since the 32 KB code size restriction is not an issue.
+2. Download and extract the MicroBoot utility from https://sourceforge.net/projects/openblt/. The MicroBoot Windows application and its associated DLLs are located in the `Host` directory inside OpenBLT's Zip archive.
 
-3. Clone this repo from a PowerShell terminal:
+3. Download and install the Keil MDK from https://www2.keil.com/mdk5/. The MDK-Lite edition is sufficient if you don't have an MDK-Essential license yet since the 32 KB code size restriction is not an issue.
+
+4. Clone this repo from a PowerShell terminal:
 
 ```PowerShell
 PS C:\Users\Frank> git clone git@bitbucket.org:lunarenergy/lunar-core.git
@@ -157,7 +160,43 @@ The process for building the `XMC4800_AWS` and `XMC1400_Boot` project files is e
 
 ## Flashing
 
-To flash a dev board after building the project for that target:
+Before we can flash our application onto a dev board from uVision we must first flash our bootloader. OpenBLT-based bootloaders were required for development starting with the 0.3.0 release of our firmware.
+
+### Bootloader
+
+Flashing a dev board with a bootloader `.hex` file only needs to be done once. uVision should not overwrite the bootloader when we flash our application. The bootloader contents starts at address 0x0 on the micro's flash so if that gets erased by accident then we must reprogram it.
+
+The most recent `.hex` bootloader file for the XMC4400 Platform2Go can be found [here](https://drive.google.com/drive/u/0/folders/1dYsagXs5T2jxb9FgIlXM-XnMNAjgvivO) on Google Drive.
+
+The most recent `.hex` bootloader file for the XMC4800 IoT AWS can be found [here](https://drive.google.com/drive/u/0/folders/1OAlV2jzjQ4OmFRCrWmOMO4gPtQkUs26M) on Google Drive.
+
+To flash an XMC4400 Platform2Go dev board with our bootloader:
+
+1. Connect a micro USB cable to your Windows machine
+2. Plug the micro USB end of the cable into the dev board
+3. Launch J-Flash Lite
+4. Select **XMC4400-512** from the **Device** menu
+5. Select **SWD** and **4000 kHz** from the **Interface** menus
+6. Click on the **OK** button
+7. Click on the **Erase Chip** button
+8. Click on the **...** button
+9. Locate the XMC4400 Platform2Go bootloader `.hex` file
+10. Click on the **Open** button
+11. Click on the **Program Device** button
+12. Close J-Flash Lite
+
+To boot an XMC4400 Platform2Go dev board into bootloader mode:
+
+1. Plug the micro USB end of the cable into the dev board
+2. Hold down the leftmost button for 1 second
+3. Press the rightmost button
+4. Release both buttons
+
+The red LED next to the leftmost button should blink rapidly.
+
+### Application
+
+To flash a dev board after building the project for that target from uVision:
 
 1. Connect a micro USB cable to your Windows machine
 2. Plug the micro USB end of the cable into the dev board
@@ -167,6 +206,22 @@ To flash a dev board after building the project for that target:
 **Note**: Continue reading if flashing fails with **Cannot load device description!**
 
 The `.flm` files for the device packs install to your user directory not `C:/Keil_v5/ARM/Flash`. The subdirectory containing the missing XMC4000 series `.flm` files is `AppData\Local\Arm\Packs\Infineon\XMC4000_DFP\2.13.0\Flash`. Copy the contents of that directory into `C:/Keil_v5/ARM/Flash` and flashing an XMC4400 Platform2Go should succeed.
+
+To update an XMC4400 Platform2Go dev board while in bootloader mode:
+
+1. Connect a micro USB cable to your Windows machine
+2. Boot an XMC4400 Platform2Go dev board into bootloader mode
+3. Launch MicroBoot
+4. Click on the **Settings** button
+5. Select **XCP on RS232** for the **Commmunication Interface**
+6. Select the COM port for the micro USB **Device**
+7. Select **57600** for the **Baudrate**
+8. Clone on the **OK** button
+9. Click on the **Browse** button
+10. Locate the XMC4400 Platform2Go `.srec` file
+11. Click on the **Open** button
+
+MicroBoot should reprogram the application section of the flash and exit. The bootloader will then hand off execution to the application causing the red LED to blink more slowly (2 Hz).
 
 ## Debugging
 
