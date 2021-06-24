@@ -58,7 +58,7 @@ Thumbs.db
 !*.UVOPT
 !*.UVOPTX
 !*.UV2
- 
+
 # Source Files
 !*.A51
 !*.A66
@@ -68,7 +68,7 @@ Thumbs.db
 !*.INC
 !*.S
 !*.SRC
- 
+
 # Listing Files
 *.COD
 *.HTM
@@ -78,7 +78,7 @@ Thumbs.db
 *.M51
 *.M66
 *.SCR
- 
+
 # Object and HEX Files
 # *.
 !*.elf
@@ -94,19 +94,21 @@ Thumbs.db
 *.OBJ
 *.O
 *.SBR
- 
+*.o
+*.d
+
 # Build Files
 *.BAT
 *._IA
 *.__I
 *._II
 *.SCR
- 
+
 # Debugger Files
 EventRecorderStub.scvd
 *.INI
 JLink*.*
- 
+
 # Other Files
 *.BUILD_LOG.HTM
 *.CDB
@@ -117,7 +119,7 @@ JLink*.*
 *.ORC
 *.PACK
 *.PDSC
-*.PLG 
+*.PLG
 !*.SCT
 *.UVL
 *.UVLA
@@ -127,4 +129,19 @@ JLink*.*
 *.SVD.XML
 *.SVD
 
+# Project objects
+Toolchain/Keil/Nucleo-L152RE/Debug/
+Toolchain/Keil/Nucleo-L152RE/Release/
+Toolchain/Keil/Nucleo-L152RE/Nucleo-L152RE.uvguix.*
 
+Toolchain/Keil/XMC1400_Boot/Debug/
+Toolchain/Keil/XMC1400_Boot/Release/
+Toolchain/Keil/XMC1400_Boot/XMC1400_Boot_Kit.uvguix.*
+
+Toolchain/Keil/XMC4400_Platform2Go/Debug/
+Toolchain/Keil/XMC4400_Platform2Go/Release/
+Toolchain/Keil/XMC4400_Platform2Go/XMC4400_Platform2Go.uvguix.*
+
+Toolchain/Keil/XMC4800_AWS/Debug/
+Toolchain/Keil/XMC4800_AWS/Release/
+Toolchain/Keil/XMC4800_AWS/XMC4800_AWS.uvguix.*
