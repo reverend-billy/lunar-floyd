@@ -131,7 +131,8 @@ Control_State_t Control_GetState(void)
 // Event handler for fault
 void Control_Fault(void)
 {
-   // TODO
+   // TODO Fill this out.
+   panic();
 }
 
 

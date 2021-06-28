@@ -69,7 +69,8 @@ void ReportMgr_Init(void)
 // Periodic update function
 void ReportMgr_Update(void)
 {
-   // TODO
+   // TODO add functionality
+   return;
 }
 
 
