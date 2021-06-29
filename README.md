@@ -4,6 +4,12 @@ The Infineon XMC microcontrollers inside Lunar Energy's products are based on Ar
 
 The smart inverter has an XMC4800 micro inside. Each battery block has an XMC4400 micro inside. Each photovoltaic optimizer each has an XMC1400 micro inside. Both the XMC4800 and XMC4400 are based on the Cortex-M4 processor core. The XMC1400 is based on the Cortex-M0 processor core.
 
+## Build status
+
+Frank Vasquez has provisioned a TeamCity server and build agent on his Windows 10 machine at home. This server is scheduled to build all three XMC micro projects on a daily basis at 3 PM GMT time. The daily build only runs if pending changes have been pushed to any branch of this Git repo since the last scheduled build.
+
+Current build status is reported as a :heavy_check_mark: or :x: next to the latest commit displayed at the top of this page. Clicking on **Details** for the most recent build returns a 404 because the TeamCity server is not on the internet. Logs for any failed builds can be found found [here](https://drive.google.com/drive/u/0/folders/1FT794MykWpJz253lTfdD_sGVFQVrSaU7) on Google Drive.
+
 ## Prerequisites
 
 If you can view this README then you already have access to this private Git repo under [Lunar Energy's GitHub organization](https://github.com/lunar-energy).
@@ -226,7 +232,7 @@ To update an XMC4400 Platform2Go dev board while in bootloader mode:
 5. Select **XCP on RS232** for the **Commmunication Interface**
 6. Select the COM port for the micro USB **Device**
 7. Select **57600** for the **Baudrate**
-8. Clone on the **OK** button
+8. Click on the **OK** button
 9. Click on the **Browse** button
 10. Locate the XMC4400 Platform2Go `.srec` file
 11. Click on the **Open** button
